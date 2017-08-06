@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Level editor Ludum dare 39</title>
+        <!-- build:css css/style.min.css -->
+        <link rel="stylesheet" href="css/style.css">
+        <!-- endbuild -->
+    </head>
+    <body>
+        <div id="tools">
+            <div id="layout-window" class="ui-window hidden">
+                <div class="ui-window-header">
+                    <div class="ui-window-menu">
+                        <img src="assets/images/no-icon.png" alt="layout new"/>
+                        <img src="assets/images/no-icon.png" alt="layout copy"/>
+                        <img src="assets/images/no-icon.png" alt="layout edit"/>
+                        <img src="assets/images/no-icon.png" alt="layout delete"/>
+                        <img src="assets/images/no-icon.png" alt="layout save"/>
+                    </div>
+                    <img class="ui-window-reduce" src="assets/images/reduce.png" alt="reduce window"/>
+                </div>
+                <div class="ui-window-content"></div>
+            </div>
+
+            <div id="tool-window" class="ui-window hidden" style="left: 260px;">
+                <div class="ui-window-header">
+                    <div class="ui-window-menu">
+                        <img src="assets/images/palette/pen.png" alt="layout new"/>
+                        <img src="assets/images/no-icon.png" alt="layout copy"/>
+                        <img src="assets/images/no-icon.png" alt="layout edit"/>
+                        <img src="assets/images/no-icon.png" alt="layout delete"/>
+                    </div>
+                    <img class="ui-window-reduce" src="assets/images/reduce.png" alt="reduce window"/>
+                </div>
+                <div class="ui-window-content palette"></div>
+            </div>
+        </div>
+        <div id="editor"></div>
+        <!-- build:js js/script.js -->
+        <script src="../node_modules/phaser-ce/build/phaser.min.js"></script>
+        <script src="js/release/app.js"></script>
+        <script src="js/release/editor/EditorState.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>

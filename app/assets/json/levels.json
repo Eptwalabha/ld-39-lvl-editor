@@ -1,0 +1,278 @@
+{
+  "levels": [
+    {
+      "name": "first empty room",
+      "layout": "tuto-1"
+    },
+    {
+      "name": "is that supposed\nto be a maze?",
+      "layout": "tuto-2"
+    },
+    {
+      "name": "What's that?",
+      "layout": "tuto-2",
+      "items": [
+        {
+          "type": "energy",
+          "options": { "amount": 25 },
+          "position": { "x": 3, "y": 3 }
+        },
+        {
+          "type": "energy",
+          "options": { "amount": 50 },
+          "position": { "x": 5, "y": 3 }
+        },
+        {
+          "type": "energy",
+          "options": { "amount": 100 },
+          "position": { "x": 7, "y": 3 }
+        }
+      ]
+    },
+    {
+      "name": "sneaky pinky",
+      "layout": "tuto-3",
+      "foes": [
+        {
+          "type": "pinky-tb-left",
+          "position": { "x": 11, "y": 2 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "face to face!",
+      "layout": "tuto-1-2",
+      "foes": [
+        {
+          "type": "dark-tb",
+          "position": { "x": 5, "y": 3 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "What? again?...\nno, it looks different",
+      "layout": "tuto-1-2",
+      "foes": [
+        {
+          "type": "dark",
+          "position": { "x": 5, "y": 3 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "I don't like this one",
+      "layout": "tuto-1-2",
+      "foes": [
+        {
+          "type": "spat-tb",
+          "position": { "x": 5, "y": 3 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "sneaky pinky part 2",
+      "layout": "tuto-3-2",
+      "foes": [
+        {
+          "type": "pinky-tb-left",
+          "position": { "x": 17, "y": 2 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Watch for the bullet!",
+      "layout": "tuto-5",
+      "foes": [
+        {
+          "type": "tb-spat",
+          "position": { "x": 4, "y": 2 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        },
+        {
+          "type": "tb-spat",
+          "position": { "x": 9, "y": 8 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5,
+            "offset": 500
+          }
+        }
+      ],
+      "items": [
+        {
+          "type": "energy",
+          "options": { "amount": 100 },
+          "position": { "x": 1, "y": 3 }
+        },
+        {
+          "type": "energy",
+          "options": { "amount": 50 },
+          "position": { "x": 1, "y": 7 }
+        },
+        {
+          "type": "energy",
+          "options": { "amount": 25 },
+          "position": { "x": 1, "y": 5 }
+        }
+      ]
+    },
+    {
+      "name": "I don't feel good",
+      "layout": "skull",
+      "foes": [
+        {
+          "type": "tb-spat",
+          "position": { "x": 4, "y": 2 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        },
+        {
+          "type": "tb-spat",
+          "position": { "x": 10, "y": 9 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5,
+            "offset": 500
+          }
+        },
+        {
+          "type": "dark",
+          "position": { "x": 10, "y": 2 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        },
+        {
+          "type": "dark",
+          "position": { "x": 4, "y": 9 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5,
+            "offset": 500
+          }
+        }
+      ],
+      "items": [
+        {
+          "type": "energy",
+          "options": { "amount": 50 },
+          "position": { "x": 7, "y": 1 }
+        },
+        {
+          "type": "energy",
+          "options": { "amount": 50 },
+          "position": { "x": 7, "y": 5 }
+        },
+        {
+          "type": "energy",
+          "options": { "amount": 100 },
+          "position": { "x": 7, "y": 8 }
+        }
+      ]
+    },
+    {
+      "name": "... not well at all.",
+      "layout": "skull",
+      "foes": [
+        {
+          "type": "tb-spat",
+          "position": { "x": 4, "y": 2 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        },
+        {
+          "type": "tb-spat",
+          "position": { "x": 10, "y": 9 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5,
+            "offset": 500
+          }
+        },
+        {
+          "type": "tb-spat",
+          "position": { "x": 10, "y": 2 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5
+          }
+        },
+        {
+          "type": "tb-spat",
+          "position": { "x": 4, "y": 9 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 5,
+            "offset": 500
+          }
+        }
+      ],
+      "items": [
+        {
+          "type": "energy",
+          "options": { "amount": 50 },
+          "position": { "x": 7, "y": 1 }
+        },
+        {
+          "type": "energy",
+          "options": { "amount": 50 },
+          "position": { "x": 7, "y": 5 }
+        },
+        {
+          "type": "energy",
+          "options": { "amount": 100 },
+          "position": { "x": 7, "y": 8 }
+        }
+      ]
+    },
+    {
+      "name": "",
+      "layout": "pillars",
+      "item": [
+        { "type": "energy", "options": { "amount": 25}, "position": { "x": 7, "y": 4 } }
+      ]
+    },
+    {
+      "name": "a hole",
+      "layout": "hole",
+      "foes": [
+        {
+          "type": "pinky-tb",
+          "position": { "x": 4, "y": 4 },
+          "options": {
+            "speed": 1000,
+            "nbr_wave": 8
+          }
+        }
+      ]
+    }
+  ]
+}
