@@ -9,31 +9,31 @@
     </head>
     <body>
         <div id="tools">
-            <div id="layout-window" class="ui-window hidden">
-                <div class="ui-window-header">
-                    <div class="ui-window-menu">
+            <div id="tool-layout" class="ui-tool folded">
+                <div class="ui-tool-header">
+                    <div class="ui-tool-menu">
                         <img src="assets/images/no-icon.png" alt="layout new"/>
                         <img src="assets/images/no-icon.png" alt="layout copy"/>
                         <img src="assets/images/no-icon.png" alt="layout edit"/>
                         <img src="assets/images/no-icon.png" alt="layout delete"/>
                         <img src="assets/images/no-icon.png" alt="layout save"/>
                     </div>
-                    <img class="ui-window-reduce" src="assets/images/reduce.png" alt="reduce window"/>
+                    <img class="ui-tool-reduce" src="assets/images/reduce.png" alt="reduce window"/>
                 </div>
-                <div class="ui-window-content"></div>
+                <div class="ui-tool-content"></div>
             </div>
 
-            <div id="tool-window" class="ui-window hidden" style="left: 260px;">
-                <div class="ui-window-header">
-                    <div class="ui-window-menu">
+            <div id="tool-palette" class="ui-tool folded" style="left: 260px;">
+                <div class="ui-tool-header">
+                    <div class="ui-tool-menu">
                         <img src="assets/images/palette/pen.png" alt="layout new"/>
                         <img src="assets/images/no-icon.png" alt="layout copy"/>
                         <img src="assets/images/no-icon.png" alt="layout edit"/>
                         <img src="assets/images/no-icon.png" alt="layout delete"/>
                     </div>
-                    <img class="ui-window-reduce" src="assets/images/reduce.png" alt="reduce window"/>
+                    <img class="ui-tool-reduce" src="assets/images/reduce.png" alt="reduce window"/>
                 </div>
-                <div class="ui-window-content palette"></div>
+                <div class="ui-tool-content palette"></div>
             </div>
         </div>
         <div id="editor"></div>
@@ -41,6 +41,10 @@
         <script src="../node_modules/phaser-ce/build/phaser.min.js"></script>
         <script src="js/release/app.js"></script>
         <script src="js/release/editor/EditorState.js"></script>
+        <script src="js/release/editor/UIWindowEditor.js"></script>
+        <script src="js/release/editor/Editor.js"></script>
+        <script src="js/release/editor/LayoutEditor.js"></script>
+        <script src="js/release/editor/LevelEditor.js"></script>
         <!-- endbuild -->
     </body>
 </html>

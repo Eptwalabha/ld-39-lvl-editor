@@ -10,11 +10,11 @@ body {
     grid-column-start: 1;
     grid-column-end: 1;
 
-    .ui-window {
+    .ui-tool {
       display: flex;
       flex-direction: column;
 
-      .ui-window-header {
+      .ui-tool-header {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -22,20 +22,20 @@ body {
         background: #7eb1c5;
         border-bottom: 1px solid #6774cc;
 
-        .ui-window-menu {
+        .ui-tool-menu {
           display: flex;
           flex-direction: row;
           flex-grow: 2;
           margin: 5px;
         }
 
-        .ui-window-reduce {
+        .ui-tool-reduce {
           justify-self: right;
           margin: 5px;
         }
       }
 
-      .ui-window-content {
+      .ui-tool-content {
 
         display: flex;
         flex-direction: column;
@@ -44,7 +44,7 @@ body {
         overflow: auto;
         padding: 0;
         background: white;
-        transition: max-height 300ms;
+        transition: max-height 200ms;
 
         span {
 
@@ -54,7 +54,7 @@ body {
           color: black;
           opacity: 0.8;
           border-bottom: 1px solid #cccccc;
-          transition: opacity 300ms, background 300ms;
+          transition: opacity 200ms, background 200ms;
 
           &:hover {
             opacity: 1;
@@ -74,12 +74,12 @@ body {
         }
       }
 
-      &.hidden {
-        .ui-window-reduce {
+      &.folded {
+        .ui-tool-reduce {
           transform: rotate(180deg);
         }
 
-        .ui-window-content {
+        .ui-tool-content {
           max-height: 0;
         }
       }
