@@ -95,4 +95,12 @@ abstract class Editor {
     dragEnd () {
         this.dragging = false;
     }
+
+    coordinatesAt (x: number, y: number) {
+        return {
+            x: Math.floor((x - this.x) / this.zoom),
+            y: Math.floor((y - this.y) / this.zoom)
+        }
+    }
+
 }

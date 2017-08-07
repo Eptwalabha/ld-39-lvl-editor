@@ -10,6 +10,8 @@ class EditorState extends Phaser.State {
     private x: number;
     private y: number;
     private graphics: Phaser.Graphics;
+    private coordinates: HTMLElement;
+    private pointer: {x: number, y: number};
 
     preload () {
         this.game.load.atlas("tile", "assets/atlas/tiles.png", "assets/atlas/tiles.json");
@@ -28,6 +30,8 @@ class EditorState extends Phaser.State {
 
         var layoutTool = document.getElementById("tool-layout") as HTMLElement;
         var paletteTool = document.getElementById("tool-palette") as HTMLElement;
+        this.coordinates = document.getElementById("mouse-position") as HTMLElement;
+        this.pointer = {x: 0, y: 0};
 
         new UIWindowEditor(layoutTool, this.layoutEditor);
         new UIWindowEditor(paletteTool, this.layoutEditor);
@@ -39,8 +43,9 @@ class EditorState extends Phaser.State {
     }
 
     update () {
+        var p = this.game.input.activePointer.position;
+        this.pointer = this.currentEditor.coordinatesAt(p.x, p.y);
         if (this.game.input.activePointer.rightButton.isDown) {
-            var p = this.game.input.activePointer.position;
             this.currentEditor.dragStart(p.x, p.y);
         } else {
             this.currentEditor.dragEnd();
@@ -52,6 +57,6 @@ class EditorState extends Phaser.State {
     render () {
         this.graphics.clear();
         this.currentEditor.render(this.graphics);
+        this.coordinates.innerText = "x = " + this.pointer.x + " ; y = " + this.pointer.y;
     }
-
 }
