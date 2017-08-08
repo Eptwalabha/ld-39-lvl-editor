@@ -109,5 +109,4 @@ abstract class Editor {
             y: Math.floor((y - this.y) / this.zoom)
         }
     }
-
 }

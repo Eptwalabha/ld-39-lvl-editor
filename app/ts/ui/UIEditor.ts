@@ -1,8 +1,8 @@
-class UIWindowEditor {
+class UIEditor {
     private window:  HTMLElement;
     private reduce:  HTMLElement;
     private header:  HTMLElement;
-    private editor: Editor;
+    protected editor: Editor;
 
     constructor (element: HTMLElement, editor: Editor) {
         this.window = element;

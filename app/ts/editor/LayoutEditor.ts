@@ -1,8 +1,5 @@
 class LayoutEditor extends Editor {
-    private current: {
-        layout: Array<Array<number>>,
-        name: string
-    };
+    public current: Layout;
 
     constructor (canvas: HTMLCanvasElement) {
         super(0, 0, canvas.width, canvas.height);
@@ -48,5 +45,9 @@ class LayoutEditor extends Editor {
             }
         }
 
+    }
+
+    load(layout: Layout) {
+        this.current = layout;
     }
 }

@@ -33,8 +33,8 @@ class EditorState extends Phaser.State {
         this.coordinates = document.getElementById("mouse-position") as HTMLElement;
         this.pointer = {x: 0, y: 0};
 
-        new UIWindowEditor(layoutTool, this.layoutEditor);
-        new UIWindowEditor(paletteTool, this.layoutEditor);
+        new LayoutUIEditor(layoutTool, this.layoutEditor);
+        new UIEditor(paletteTool, this.layoutEditor);
 
         this.graphics = this.game.add.graphics();
         this.game.input.mouse.capture = true;
