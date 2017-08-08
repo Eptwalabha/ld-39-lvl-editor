@@ -51,6 +51,10 @@ class EditorState extends Phaser.State {
             this.currentEditor.dragEnd();
         }
 
+        if (this.game.input.activePointer.leftButton.isDown) {
+            this.currentEditor.clickAt(this.pointer.x, this.pointer.y);
+        }
+
         this.currentEditor.update();
     }
 

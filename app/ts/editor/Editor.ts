@@ -18,6 +18,7 @@ abstract class Editor {
 
     abstract update(): void;
     abstract render(graphics: Phaser.Graphics): void;
+    abstract clickAt(x: number, y: number): any;
     abstract generate(): any;
 
     updateOrigin(x: number, y: number): void {
@@ -88,8 +89,14 @@ abstract class Editor {
             this.dragDiffX = this.x - x;
             this.dragDiffY = this.y - y;
         }
-        this.x = x + this.dragDiffX;
-        this.y = y + this.dragDiffY;
+        if (x + this.dragDiffX >= this.zoom / 2) {
+            this.dragDiffX = this.zoom / 2 - x;
+        }
+        if (y + this.dragDiffY >= this.zoom / 2) {
+            this.dragDiffY = this.zoom / 2 - y;
+        }
+        this.x = this.dragDiffX + x;
+        this.y = this.dragDiffY + y;
     }
 
     dragEnd () {

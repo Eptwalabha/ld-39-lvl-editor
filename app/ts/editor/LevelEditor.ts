@@ -14,4 +14,8 @@ class LevelEditor extends Editor {
     generate () {
         return [];
     }
+
+    clickAt (x: number, y: number) {
+
+    }
 }
