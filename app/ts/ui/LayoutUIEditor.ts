@@ -35,11 +35,9 @@ class LayoutUIEditor extends UIEditor {
     }
 
     createNewLayout() {
-
         var layoutName: string,
             validName: boolean,
             attempt = 0;
-
         do {
             attempt++;
             layoutName = prompt("new layout name", "layout-" + Date.now());
@@ -48,17 +46,40 @@ class LayoutUIEditor extends UIEditor {
         } while (!validName && attempt < 3);
 
         if (validName) {
-            var newLayout = {
-                name: layoutName,
-                layout: []
-            };
-            this.layoutEditor.load(newLayout);
-            this.addNewLayoutToList(newLayout, true);
+            this.addNewLayout(layoutName);
         }
     }
 
+    addNewLayout (name: string) {
+        var newLayout = {
+            name: name,
+            layout: []
+        };
+        this.layoutEditor.load(newLayout);
+        this.addNewLayoutToList(newLayout, true);
+    }
+
     deleteCurrentLayout() {
-        console.log("delete");
+        var name = this.layoutEditor.current.name;
+        var confirmDelete = confirm("delete layout " + name + "?");
+        if (!confirmDelete) {
+            return;
+        }
+        var line: HTMLElement = this.html_layouts.querySelector("span.active") as HTMLElement;
+        line.parentElement.removeChild(line);
+        var index = this.getIndex(name);
+        if (index >= 0) {
+            this.layouts.splice(index, 1);
+            if (index >= this.layouts.length) {
+                index--;
+            }
+            if (index >= 0) {
+                this.html_layouts.querySelectorAll("span")[index].classList.add("active");
+                this.layoutEditor.load(this.layouts[index]);
+            } else {
+                this.addNewLayout("no name");
+            }
+        }
     }
 
     copyCurrentLayout() {
@@ -136,5 +157,14 @@ class LayoutUIEditor extends UIEditor {
             this.addNewLayoutToList(json[i], i === 0);
             if (i === 0) this.layoutEditor.load(json[i]);
         }
+    }
+
+    private getIndex(name: string) {
+        for (var i = 0; i < this.layouts.length; ++i) {
+            if (this.layouts[i].name === name) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
