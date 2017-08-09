@@ -27,6 +27,17 @@ body {
           flex-direction: row;
           flex-grow: 2;
           margin: 5px;
+
+
+          & > img {
+
+            transition: background-color 200ms;
+            border-radius: 3px;
+
+            &:hover {
+              background-color: #c2ceff;
+            }
+          }
         }
 
         .ui-tool-reduce {
