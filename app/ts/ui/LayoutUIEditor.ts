@@ -15,6 +15,7 @@ class LayoutUIEditor extends UIEditor {
         this.html_layouts = element.querySelector(".ui-tool-content") as HTMLElement;
         this.layouts = [];
         this.bindMenus(element);
+        this.loadFromLocalStorage();
     }
 
     private bindMenus (element: HTMLElement) {
@@ -57,7 +58,17 @@ class LayoutUIEditor extends UIEditor {
     }
 
     saveCurrentLayout() {
-        console.log("save");
+        var json = JSON.stringify(this.layouts);
+        localStorage.setItem("layouts", json);
+    }
+
+    private loadFromLocalStorage () {
+        var jsonStr = localStorage.getItem("layouts");
+        var json = JSON.parse(jsonStr);
+        for (var i = 0; i < json.length; ++i) {
+            this.addNewLayoutToList(json[i], i === 0);
+            if (i === 0) this.layoutEditor.load(json[i]);
+        }
     }
 
     deleteCurrentLayout() {

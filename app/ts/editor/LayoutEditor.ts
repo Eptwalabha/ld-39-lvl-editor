@@ -34,10 +34,10 @@ class LayoutEditor extends Editor {
 
         var layout = this.current.layout;
 
-        for (var y = -10; y < layout.length; ++y) {
-            if (layout[y] === undefined) continue;
-            for (var x = -10; x < layout[y].length; ++x) {
-                if (layout[y][x] === undefined) continue;
+        for (var y = 0; y < layout.length; ++y) {
+            if (layout[y] === undefined || layout[y] === null) continue;
+            for (var x = 0; x < layout[y].length; ++x) {
+                if (layout[y][x] === undefined || layout[y][x] === null) continue;
 
                 graphics.beginFill(0x555555, 1);
                 graphics.drawRect(x * this.zoom + this.x, y * this.zoom + this.y, this.zoom, this.zoom);
