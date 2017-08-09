@@ -35,18 +35,9 @@ class LayoutUIEditor extends UIEditor {
     }
 
     createNewLayout() {
-        var layoutName: string,
-            validName: boolean,
-            attempt = 0;
-        do {
-            attempt++;
-            layoutName = prompt("new layout name", "layout-" + Date.now());
-            validName = layoutName !== null && layoutName.length > 0 && !this.hasLayoutName(layoutName);
-            console.log(layoutName, validName);
-        } while (!validName && attempt < 3);
-
-        if (validName) {
-            this.addNewLayout(layoutName);
+        var name = this.promptNewName("new layout name", "layout-" + Date.now());
+        if (name) {
+            this.addNewLayout(name);
         }
     }
 
@@ -83,7 +74,32 @@ class LayoutUIEditor extends UIEditor {
     }
 
     copyCurrentLayout() {
-        console.log("copy");
+        var name = this.promptNewName("copy's name", this.layoutEditor.current.name + " (copy)");
+        if (name) {
+            var newLayout = this.copyLayout(this.layoutEditor.current);
+            newLayout.name = name;
+            this.layoutEditor.load(newLayout);
+            this.addNewLayoutToList(newLayout, true);
+        }
+    }
+
+    private promptNewName (promptText: string, suggestion: string = "") {
+        var layoutName: string,
+            validName: boolean,
+            attempt = 0;
+        do {
+            attempt++;
+            layoutName = prompt(promptText, suggestion);
+            if (!layoutName) {
+                return undefined;
+            }
+            validName = layoutName.length > 0 && !this.hasLayoutName(layoutName);
+        } while (!validName && attempt < 3);
+
+        if (validName) {
+            return layoutName;
+        }
+        return undefined;
     }
 
     private hasLayoutName(layoutName: string) {
@@ -123,28 +139,32 @@ class LayoutUIEditor extends UIEditor {
         element.classList.add("active");
     }
 
-    private saveToLocalStorage() {
-        var layouts: Array<Layout> = [];
-
-        for (var l = 0; l < this.layouts.length; ++l) {
-            var layout = [];
-            for (var j = 0; j < this.layouts[l].layout.length; ++j) {
-                layout[j] = [];
-                if (!this.layouts[l].layout[j]) {
-                    continue;
-                }
-                for (var i = 0; i < this.layouts[l].layout[j].length; ++i) {
-                    if (!this.layouts[l].layout[j][i]) {
-                        layout[j][i] = 0;
-                    } else {
-                        layout[j][i] = this.layouts[l].layout[j][i];
-                    }
+    private copyLayout (layout: Layout): Layout {
+        var copy: Layout = {
+            name: layout.name,
+            layout: []
+        };
+        for (var j = 0; j < layout.layout.length; ++j) {
+            copy.layout[j] = [];
+            if (!layout.layout[j]) {
+                continue;
+            }
+            for (var i = 0; i < layout.layout[j].length; ++i) {
+                if (!layout.layout[j][i]) {
+                    copy.layout[j][i] = 0;
+                } else {
+                    copy.layout[j][i] = layout.layout[j][i];
                 }
             }
-            layouts.push({
-                name: this.layouts[l].name,
-                layout: layout
-            });
+        }
+        return copy;
+    }
+
+    private saveToLocalStorage() {
+        var layouts: Array<Layout> = [];
+        for (var l = 0; l < this.layouts.length; ++l) {
+            var layout = this.copyLayout(this.layouts[l]);
+            layouts.push(layout);
         }
         var json = JSON.stringify(layouts);
         localStorage.setItem("layouts", json);
