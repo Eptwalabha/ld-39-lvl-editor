@@ -24,7 +24,7 @@ class LayoutUIEditor extends UIEditor {
             self.createNewLayout();
         });
         element.querySelector("#ui-tool-menu-save").addEventListener('click', function () {
-            self.saveCurrentLayout();
+            self.saveToLocalStorage();
         });
         element.querySelector("#ui-tool-menu-delete").addEventListener('click', function () {
             self.deleteCurrentLayout();
@@ -54,20 +54,6 @@ class LayoutUIEditor extends UIEditor {
             };
             this.layoutEditor.load(newLayout);
             this.addNewLayoutToList(newLayout, true);
-        }
-    }
-
-    saveCurrentLayout() {
-        var json = JSON.stringify(this.layouts);
-        localStorage.setItem("layouts", json);
-    }
-
-    private loadFromLocalStorage () {
-        var jsonStr = localStorage.getItem("layouts");
-        var json = JSON.parse(jsonStr);
-        for (var i = 0; i < json.length; ++i) {
-            this.addNewLayoutToList(json[i], i === 0);
-            if (i === 0) this.layoutEditor.load(json[i]);
         }
     }
 
@@ -114,5 +100,41 @@ class LayoutUIEditor extends UIEditor {
             spans[i].classList.remove("active");
         }
         element.classList.add("active");
+    }
+
+    private saveToLocalStorage() {
+        var layouts: Array<Layout> = [];
+
+        for (var l = 0; l < this.layouts.length; ++l) {
+            var layout = [];
+            for (var j = 0; j < this.layouts[l].layout.length; ++j) {
+                layout[j] = [];
+                if (!this.layouts[l].layout[j]) {
+                    continue;
+                }
+                for (var i = 0; i < this.layouts[l].layout[j].length; ++i) {
+                    if (!this.layouts[l].layout[j][i]) {
+                        layout[j][i] = 0;
+                    } else {
+                        layout[j][i] = this.layouts[l].layout[j][i];
+                    }
+                }
+            }
+            layouts.push({
+                name: this.layouts[l].name,
+                layout: layout
+            });
+        }
+        var json = JSON.stringify(layouts);
+        localStorage.setItem("layouts", json);
+    }
+
+    private loadFromLocalStorage () {
+        var jsonStr = localStorage.getItem("layouts");
+        var json = JSON.parse(jsonStr);
+        for (var i = 0; i < json.length; ++i) {
+            this.addNewLayoutToList(json[i], i === 0);
+            if (i === 0) this.layoutEditor.load(json[i]);
+        }
     }
 }

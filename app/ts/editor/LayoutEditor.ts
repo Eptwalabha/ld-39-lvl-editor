@@ -24,7 +24,7 @@ class LayoutEditor extends Editor {
     clickAt (x: number, y: number) {
         if (x < 0 || y < 0) return;
 
-        if (this.current.layout[y] === undefined) {
+        if (!this.current.layout[y]) {
             this.current.layout[y] = [];
         }
         this.current.layout[y][x] = 1;
@@ -35,9 +35,9 @@ class LayoutEditor extends Editor {
         var layout = this.current.layout;
 
         for (var y = 0; y < layout.length; ++y) {
-            if (layout[y] === undefined || layout[y] === null) continue;
+            if (!layout[y]) continue;
             for (var x = 0; x < layout[y].length; ++x) {
-                if (layout[y][x] === undefined || layout[y][x] === null) continue;
+                if (!layout[y][x]) continue;
 
                 graphics.beginFill(0x555555, 1);
                 graphics.drawRect(x * this.zoom + this.x, y * this.zoom + this.y, this.zoom, this.zoom);
