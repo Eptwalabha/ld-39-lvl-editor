@@ -172,10 +172,14 @@ class LayoutUIEditor extends UIEditor {
 
     private loadFromLocalStorage () {
         var jsonStr = localStorage.getItem("layouts");
-        var json = JSON.parse(jsonStr);
-        for (var i = 0; i < json.length; ++i) {
-            this.addNewLayoutToList(json[i], i === 0);
-            if (i === 0) this.layoutEditor.load(json[i]);
+        try {
+            var json = JSON.parse(jsonStr);
+            for (var i = 0; i < json.length; ++i) {
+                this.addNewLayoutToList(json[i], i === 0);
+                if (i === 0) this.layoutEditor.load(json[i]);
+            }
+        } catch (err) {
+            this.addNewLayout("blank");
         }
     }
 

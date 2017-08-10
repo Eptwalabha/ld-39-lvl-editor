@@ -1,7 +1,7 @@
 class LevelEditor extends Editor {
 
     constructor (canvas: HTMLCanvasElement) {
-        super(0, 0, canvas.width, canvas.height);
+        super(0, 0, canvas);
     }
 
     update (): void {

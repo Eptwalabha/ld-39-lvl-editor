@@ -2,7 +2,7 @@ class LayoutEditor extends Editor {
     public current: Layout;
 
     constructor (canvas: HTMLCanvasElement) {
-        super(0, 0, canvas.width, canvas.height);
+        super(0, 0, canvas);
         this.current = {
             layout: [],
             name: "toto"

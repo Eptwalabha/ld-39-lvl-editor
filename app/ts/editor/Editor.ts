@@ -2,18 +2,17 @@ abstract class Editor {
 
     protected x: number;
     protected y: number;
-    protected w: number;
-    protected h: number;
     protected zoom: number;
     private dragging: boolean;
     private dragDiffX: number;
     private dragDiffY: number;
+    private canvas: HTMLCanvasElement;
 
-    constructor (x: number, y: number, w: number, h: number) {
+    constructor (x: number, y: number, canvas: HTMLCanvasElement) {
         this.updateOrigin(x, y);
-        this.updateDimensions(w, h);
-        this.zoom = 20;
+        this.zoom = 15;
         this.dragging = false;
+        this.canvas = canvas;
     }
 
     abstract update(): void;
@@ -25,11 +24,6 @@ abstract class Editor {
         this.x = x;
         this.y = y;
     };
-
-    updateDimensions(w: number, h: number) {
-        this.w = w;
-        this.h = h;
-    }
 
     renderGrid(graphics: Phaser.Graphics) {
         var x = (this.x > 0) ? - Math.floor(this.x / this.zoom) : Math.ceil(Math.abs(this.x) / this.zoom);
@@ -52,12 +46,12 @@ abstract class Editor {
             }
             graphics.lineStyle(thickness, color, .5);
             graphics.moveTo(offsetX, 0);
-            graphics.lineTo(offsetX, this.h);
+            graphics.lineTo(offsetX, this.canvas.height);
             graphics.endFill();
             offsetX += this.zoom;
             x++;
 
-        } while (offsetX < this.w);
+        } while (offsetX < this.canvas.width);
 
         do {
             color = 0xcccccc;
@@ -73,12 +67,12 @@ abstract class Editor {
             }
             graphics.lineStyle(thickness, color, 1);
             graphics.moveTo(0, offsetY);
-            graphics.lineTo(this.w, offsetY);
+            graphics.lineTo(this.canvas.width, offsetY);
             graphics.endFill();
             offsetY += this.zoom;
             y++;
 
-        } while (offsetY < this.h);
+        } while (offsetY < this.canvas.height);
 
 
     }
