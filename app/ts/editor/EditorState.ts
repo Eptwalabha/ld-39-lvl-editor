@@ -1,8 +1,3 @@
-enum TOOL {
-    ERASER,
-    PEN
-}
-
 class EditorState extends Phaser.State {
     private layoutEditor: LayoutEditor;
     private levelEditor: LevelEditor;
@@ -34,7 +29,7 @@ class EditorState extends Phaser.State {
         this.pointer = {x: 0, y: 0};
 
         new LayoutUIEditor(layoutTool, this.layoutEditor);
-        new UIEditor(paletteTool, this.layoutEditor);
+        new PaletteUIEditor(paletteTool, this.layoutEditor);
 
         this.graphics = this.game.add.graphics();
         this.game.input.mouse.capture = true;

@@ -1,5 +1,6 @@
 class LayoutEditor extends Editor {
     public current: Layout;
+    public tool: LayoutTool;
 
     constructor (canvas: HTMLCanvasElement) {
         super(0, 0, canvas);
@@ -24,10 +25,7 @@ class LayoutEditor extends Editor {
     clickAt (x: number, y: number) {
         if (x < 0 || y < 0) return;
 
-        if (!this.current.layout[y]) {
-            this.current.layout[y] = [];
-        }
-        this.current.layout[y][x] = 1;
+        this.tool.process(x, y, this.current);
     }
 
     private renderLayout(graphics: Phaser.Graphics) {
@@ -49,5 +47,9 @@ class LayoutEditor extends Editor {
 
     load(layout: Layout) {
         this.current = layout;
+    }
+
+    changeTool (tool: LayoutTool) {
+        this.tool = tool;
     }
 }

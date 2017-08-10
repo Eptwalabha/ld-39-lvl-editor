@@ -13,6 +13,7 @@ html {
 
       grid-column-start: 1;
       grid-column-end: 1;
+      overflow: auto;
 
       .ui-tool {
         display: flex;
@@ -39,7 +40,11 @@ html {
               border-radius: 3px;
 
               &:hover {
-                background-color: #c2ceff;
+                background-color: #5796b0;
+              }
+
+              &.selected {
+                background-color: white;
               }
             }
           }
@@ -86,6 +91,23 @@ html {
           &.palette {
             flex-direction: row;
             flex-wrap: wrap;
+            background: #ccc;
+
+            span {
+              width: 32px;
+              height: 32px;
+              padding: 0;
+              border: 3px solid #ccc;
+              background: white;
+              transition: border-color 200ms;
+
+              &:hover {
+                border-color: #7eb1c5;
+              }
+              &.selected {
+                border-color: #5796b0;
+              }
+            }
           }
         }
 

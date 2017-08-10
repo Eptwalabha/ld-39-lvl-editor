@@ -25,7 +25,8 @@
             <div id="tool-palette" class="ui-tool" style="left: 260px;">
                 <div class="ui-tool-header">
                     <div class="ui-tool-menu">
-                        <img src="assets/images/palette/pen.png" alt="palette pen"/>
+                        <img id="ui-palette-pen" src="assets/images/palette/pen.png" alt="palette pen" class="selected"/>
+                        <img id="ui-palette-eraser" src="assets/images/palette/eraser.png" alt="palette eraser"/>
                     </div>
                     <img class="ui-tool-reduce" src="assets/images/reduce.png" alt="reduce window"/>
                 </div>
@@ -42,8 +43,12 @@
         <script src="js/release/editor/Editor.js"></script>
         <script src="js/release/editor/LayoutEditor.js"></script>
         <script src="js/release/editor/LevelEditor.js"></script>
+        <script src="js/release/editor/tools/LayoutTool.js"></script>
+        <script src="js/release/editor/tools/PenTool.js"></script>
+        <script src="js/release/editor/tools/EraserTool.js"></script>
         <script src="js/release/ui/UIEditor.js"></script>
         <script src="js/release/ui/LayoutUIEditor.js"></script>
+        <script src="js/release/ui/PaletteUIEditor.js"></script>
         <!-- endbuild -->
     </body>
 </html>

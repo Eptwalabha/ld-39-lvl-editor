@@ -1,7 +1,7 @@
 class UIEditor {
     private window:  HTMLElement;
     private reduce:  HTMLElement;
-    private header:  HTMLElement;
+    protected header:  HTMLElement;
     protected editor: Editor;
 
     constructor (element: HTMLElement, editor: Editor) {
