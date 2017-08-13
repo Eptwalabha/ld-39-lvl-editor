@@ -12,7 +12,7 @@ class LayoutUIEditor extends UIEditor {
     constructor (element: HTMLElement, editor: LayoutEditor) {
         super(element, editor);
         this.layoutEditor = editor;
-        this.html_layouts = element.querySelector(".ui-tool-content") as HTMLElement;
+        this.html_layouts = element.querySelector(".ui-section-content") as HTMLElement;
         this.layouts = [];
         this.bindMenus(element);
         this.loadFromLocalStorage();
@@ -150,8 +150,8 @@ class LayoutUIEditor extends UIEditor {
                 continue;
             }
             for (var i = 0; i < layout.layout[j].length; ++i) {
-                if (!layout.layout[j][i]) {
-                    copy.layout[j][i] = 0;
+                if (!layout.layout[j][i] && layout.layout[j][i] !== 0) {
+                    copy.layout[j][i] = null;
                 } else {
                     copy.layout[j][i] = layout.layout[j][i];
                 }

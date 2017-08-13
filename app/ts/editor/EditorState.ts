@@ -13,7 +13,7 @@ class EditorState extends Phaser.State {
     }
 
     create () {
-        this.game.stage.backgroundColor = "#eee";
+        this.game.stage.backgroundColor = "#ddd";
         this.game.stage.smoothed = false;
         this.game.canvas.oncontextmenu = function (e: PointerEvent) {
             e.preventDefault();

@@ -1,0 +1,137 @@
+#tools {
+
+  grid-column-start: 1;
+  grid-column-end: 1;
+  overflow: auto;
+
+  .section-layout {
+    background: #7eb1c5;
+    .ui-section-header {
+      .ui-menu {
+        & > img {
+          transition: background-color 200ms;
+          border-radius: 3px;
+
+          &:hover {
+            background-color: #5796b0;
+          }
+
+          &.selected {
+            background-color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .section-level {
+    background: #bac585;
+    .ui-section-header {
+      .ui-menu {
+        & > img {
+          transition: background-color 200ms;
+          border-radius: 3px;
+
+          &:hover {
+            background-color: #abb061;
+          }
+
+          &.selected {
+            background-color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .ui-section {
+    display: flex;
+    flex-direction: column;
+
+    .ui-section-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid #6774cc;
+
+      .ui-menu {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 2;
+        margin: 5px;
+      }
+
+      .ui-reduce {
+        justify-self: right;
+        margin: 5px;
+      }
+    }
+
+    .ui-section-content {
+
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      max-height: 200px;
+      overflow: auto;
+      padding: 0;
+      background: white;
+      transition: max-height 200ms;
+
+      span {
+
+        background: white;
+        line-height: 32px;
+        padding: 0 10px;
+        color: black;
+        opacity: 0.8;
+        border-bottom: 1px solid #cccccc;
+        transition: opacity 200ms, background 200ms;
+
+        &:hover {
+          opacity: 1;
+          background: #cccccc;
+          cursor: pointer;
+        }
+
+        &.active {
+          opacity: 1;
+          background: #8ec5b2;
+        }
+      }
+
+      &.palette {
+        flex-direction: row;
+        flex-wrap: wrap;
+        background: #ccc;
+
+        span {
+          width: 32px;
+          height: 32px;
+          padding: 0;
+          border: 3px solid #ccc;
+          background: white;
+          transition: border-color 200ms;
+
+          &:hover {
+            border-color: #7eb1c5;
+          }
+          &.selected {
+            border-color: #5796b0;
+          }
+        }
+      }
+    }
+
+    &.folded {
+      .ui-reduce {
+        transform: rotate(180deg);
+      }
+
+      .ui-section-content {
+        max-height: 0;
+      }
+    }
+  }
+}

@@ -9,7 +9,7 @@ class PaletteUIEditor extends UIEditor {
     constructor (element: HTMLElement, editor: LayoutEditor) {
         super(element, editor);
         this.layoutEditor = editor;
-        this.html_layouts = element.querySelector(".ui-tool-content") as HTMLElement;
+        this.html_layouts = element.querySelector(".ui-section-content") as HTMLElement;
         this.bindMenus(element);
         this.bindTiles();
         this.pen = new PenTool();
@@ -31,11 +31,12 @@ class PaletteUIEditor extends UIEditor {
 
     private bindTiles () {
         var self = this;
-        for (var i = 0; i < 50; ++i) {
+        for (var i = 0; i < 12; ++i) {
             var tile = document.createElement('span');
             tile.classList.add("palette");
             if (i === 0) tile.classList.add("selected");
-            tile.dataset.tileValue = "" + i;
+            tile.dataset.tileValue = i.toString(10);
+            tile.style.backgroundColor = "#" + ("000000" + LayoutEditor.getColor(i).toString(16)).substr(-6);
             this.html_layouts.appendChild(tile);
             tile.addEventListener('click', function () {
                 self.pen.setValue(parseInt(this.dataset.tileValue, 10));

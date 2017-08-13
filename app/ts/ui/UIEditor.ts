@@ -6,8 +6,8 @@ class UIEditor {
 
     constructor (element: HTMLElement, editor: Editor) {
         this.window = element;
-        this.reduce = element.querySelector('.ui-tool-reduce') as HTMLElement;
-        this.header = element.querySelector('.ui-tool-header') as HTMLElement;
+        this.reduce = element.querySelector('.ui-reduce') as HTMLElement;
+        this.header = element.querySelector('.ui-section-header') as HTMLElement;
         this.editor = editor;
 
         var self = this;
