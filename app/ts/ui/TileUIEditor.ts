@@ -1,4 +1,4 @@
-class PaletteUIEditor extends UIEditor {
+class TileUIEditor extends UIEditor {
 
     private html_layouts: HTMLElement;
     private layoutEditor: LayoutEditor;
@@ -19,11 +19,11 @@ class PaletteUIEditor extends UIEditor {
 
     private bindMenus (element: HTMLElement) {
         var self = this;
-        element.querySelector("#ui-palette-pen").addEventListener('click', function () {
+        element.querySelector("#ui-tile-pen").addEventListener('click', function () {
             self.layoutEditor.changeTool(self.pen);
             self.selectMenu(this);
         });
-        element.querySelector("#ui-palette-eraser").addEventListener('click', function () {
+        element.querySelector("#ui-tile-eraser").addEventListener('click', function () {
             self.layoutEditor.changeTool(self.eraser);
             self.selectMenu(this);
         });
@@ -33,7 +33,7 @@ class PaletteUIEditor extends UIEditor {
         var self = this;
         for (var i = 0; i < 12; ++i) {
             var tile = document.createElement('span');
-            tile.classList.add("palette");
+            tile.classList.add("tile");
             if (i === 0) tile.classList.add("selected");
             tile.dataset.tileValue = i.toString(10);
             tile.style.backgroundColor = "#" + ("000000" + LayoutEditor.getColor(i).toString(16)).substr(-6);
@@ -54,7 +54,7 @@ class PaletteUIEditor extends UIEditor {
     }
 
     private selectTile (tile: HTMLSpanElement) {
-        var tiles = this.html_layouts.querySelectorAll(".palette");
+        var tiles = this.html_layouts.querySelectorAll(".tile");
         for (var j = 0; j < tiles.length; ++j) {
             tiles[j].classList.remove("selected");
         }

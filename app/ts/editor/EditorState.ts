@@ -24,12 +24,12 @@ class EditorState extends Phaser.State {
         this.currentEditor = this.layoutEditor;
 
         var layoutTool = document.getElementById("tool-layout") as HTMLElement;
-        var paletteTool = document.getElementById("tool-palette") as HTMLElement;
+        var tileTool = document.getElementById("tool-tile") as HTMLElement;
         this.coordinates = document.getElementById("mouse-position") as HTMLElement;
         this.pointer = {x: 0, y: 0};
 
         new LayoutUIEditor(layoutTool, this.layoutEditor);
-        new PaletteUIEditor(paletteTool, this.layoutEditor);
+        new TileUIEditor(tileTool, this.layoutEditor);
 
         this.graphics = this.game.add.graphics();
         this.game.input.mouse.capture = true;
