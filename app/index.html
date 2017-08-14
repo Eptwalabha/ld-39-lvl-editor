@@ -22,7 +22,30 @@
                 <div class="ui-section-content"></div>
             </div>
 
-            <div id="tool-layout" class="ui-section section-layout folded">
+            <div id="tool-entity" class="ui-section section-level">
+                <div class="ui-section-header">
+                    <div class="ui-menu">
+                        <img id="ui-entity-level" src="assets/images/no-icon.png" alt="add level item" class="selected"/>
+                        <img id="ui-entity-game-item" src="assets/images/no-icon.png" alt="add item"/>
+                        <img id="ui-entity-monster" src="assets/images/no-icon.png" alt="add monster"/>
+                        <img id="ui-entity-eraser" src="assets/images/palette/eraser.png" alt="entity eraser"/>
+                    </div>
+                    <img class="ui-reduce" src="assets/images/reduce.png" alt="reduce window"/>
+                </div>
+                <div class="ui-section-content toggle-menu">
+                    <div data-menu-id="ui-entity-level" class="toggle-menu-tab active">
+                        level item menu
+                    </div>
+                    <div data-menu-id="ui-entity-game-item" class="toggle-menu-tab">
+                        game item menu
+                    </div>
+                    <div data-menu-id="ui-entity-monster" class="toggle-menu-tab">
+                        monster menu
+                    </div>
+                </div>
+            </div>
+
+            <div id="tool-layout" class="ui-section section-layout">
                 <div class="ui-section-header">
                     <div class="ui-menu">
                         <img id="ui-tool-menu-new" src="assets/images/tools/new.png" alt="new layout" title="create new layout"/>
@@ -35,7 +58,7 @@
                 <div class="ui-section-content"></div>
             </div>
 
-            <div id="tool-tile" class="ui-section section-layout folded">
+            <div id="tool-tile" class="ui-section section-layout">
                 <div class="ui-section-header">
                     <div class="ui-menu">
                         <img id="ui-tile-pen" src="assets/images/palette/pen.png" alt="tile pen" class="selected"/>

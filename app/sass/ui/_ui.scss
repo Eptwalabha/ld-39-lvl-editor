@@ -4,6 +4,10 @@
   grid-column-end: 1;
   overflow: auto;
 
+  .ui-section-header .ui-menu img {
+    cursor: pointer;
+  }
+
   .section-layout {
     background: #7eb1c5;
     .ui-section-header {
@@ -131,6 +135,16 @@
 
       .ui-section-content {
         max-height: 0;
+      }
+    }
+  }
+
+  .toggle-menu {
+    .toggle-menu-tab {
+      display: none;
+
+      &.active {
+        display: block;
       }
     }
   }

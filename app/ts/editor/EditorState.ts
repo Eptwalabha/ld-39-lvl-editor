@@ -23,11 +23,13 @@ class EditorState extends Phaser.State {
         this.levelEditor = new LevelEditor(this.game.canvas);
         this.currentEditor = this.layoutEditor;
 
+        var entityTool = document.getElementById("tool-entity") as HTMLElement;
         var layoutTool = document.getElementById("tool-layout") as HTMLElement;
         var tileTool = document.getElementById("tool-tile") as HTMLElement;
         this.coordinates = document.getElementById("mouse-position") as HTMLElement;
         this.pointer = {x: 0, y: 0};
 
+        new EntityUIEditor(entityTool, this.levelEditor);
         new LayoutUIEditor(layoutTool, this.layoutEditor);
         new TileUIEditor(tileTool, this.layoutEditor);
 

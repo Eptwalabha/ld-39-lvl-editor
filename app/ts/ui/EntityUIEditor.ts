@@ -9,7 +9,6 @@ class EntityUIEditor extends UIEditor {
         this.levelEditor = editor;
         this.htmlSection = element.querySelector(".ui-section-content") as HTMLElement;
         this.bindMenus(element);
-        this.bindTiles();
         this.pen = new PenLevelTool();
         // this.eraser = new EraserTool();
         this.levelEditor.changeTool(this.pen);
@@ -17,31 +16,25 @@ class EntityUIEditor extends UIEditor {
 
     private bindMenus (element: HTMLElement) {
         var self = this;
-        element.querySelector("#ui-entity-pen").addEventListener('click', function () {
+        element.querySelector("#ui-entity-level").addEventListener('click', function () {
+            // TODO
+            self.levelEditor.changeTool(self.pen);
+            self.selectMenu(this);
+        });
+        element.querySelector("#ui-entity-game-item").addEventListener('click', function () {
+            // TODO
+            self.levelEditor.changeTool(self.pen);
+            self.selectMenu(this);
+        });
+        element.querySelector("#ui-entity-monster").addEventListener('click', function () {
+            // TODO
             self.levelEditor.changeTool(self.pen);
             self.selectMenu(this);
         });
         element.querySelector("#ui-entity-eraser").addEventListener('click', function () {
-            // TODO
-            // self.levelEditor.changeTool(self.eraser);
-            // self.selectMenu(this);
+            // TODO eraser
+            self.selectMenu(this);
         });
-    }
-
-    private bindTiles () {
-        var self = this;
-        for (var i = 0; i < 12; ++i) {
-            var tile = document.createElement('span');
-            tile.classList.add("tile");
-            if (i === 0) tile.classList.add("selected");
-            tile.dataset.tileValue = i.toString(10);
-            tile.style.backgroundColor = "#" + ("000000" + LayoutEditor.getColor(i).toString(16)).substr(-6);
-            this.htmlSection.appendChild(tile);
-            tile.addEventListener('click', function () {
-                self.pen.setValue(parseInt(this.dataset.tileValue, 10), 1);
-                self.selectTile(this);
-            });
-        }
     }
 
     private selectMenu(menu: HTMLImageElement) {
@@ -50,13 +43,23 @@ class EntityUIEditor extends UIEditor {
             images[i].classList.remove("selected");
         }
         menu.classList.add("selected");
+        this.toggleMenu(menu.id)
     }
 
-    private selectTile (tile: HTMLSpanElement) {
-        var tiles = this.htmlSection.querySelectorAll(".tile");
-        for (var j = 0; j < tiles.length; ++j) {
-            tiles[j].classList.remove("selected");
+    private toggleMenu (menuId: string) {
+        var result = this.htmlSection.querySelector("div[data-menu-id='" + menuId + "']");
+        if (result) {
+            var menus = this.htmlSection.querySelectorAll("div.toggle-menu-tab");
+            for (var i in menus) {
+                if (!menus.hasOwnProperty(i)) continue;
+                menus[i].classList.remove("active");
+            }
+            result.classList.add("active");
+            this.activeMenu(result as HTMLElement);
         }
-        tile.classList.add("selected");
+    }
+
+    private activeMenu(activeMenu: HTMLElement) {
+        console.log(activeMenu.dataset);
     }
 }
