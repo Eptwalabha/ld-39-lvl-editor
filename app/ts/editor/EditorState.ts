@@ -19,7 +19,7 @@ class EditorState extends Phaser.State {
             e.preventDefault();
         };
         this.camera.flash(0x000000);
-        this.layoutEditor = new LayoutEditor(this.game.canvas);
+        this.layoutEditor = new LayoutEditor(this.game.canvas, new LayoutManager());
         this.levelEditor = new LevelEditor(this.game.canvas);
         this.currentEditor = this.layoutEditor;
 

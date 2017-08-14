@@ -1,21 +1,14 @@
-interface Layout {
-    name: string,
-    layout: Array<Array<number>>
-}
-
 class LayoutUIEditor extends UIEditor {
 
     private layoutEditor: LayoutEditor;
-    private layouts: Array<Layout>;
     private html_layouts: HTMLElement;
 
     constructor (element: HTMLElement, editor: LayoutEditor) {
         super(element, editor);
         this.layoutEditor = editor;
         this.html_layouts = element.querySelector(".ui-section-content") as HTMLElement;
-        this.layouts = [];
         this.bindMenus(element);
-        this.loadFromLocalStorage();
+        this.updateList();
     }
 
     private bindMenus (element: HTMLElement) {
@@ -24,7 +17,7 @@ class LayoutUIEditor extends UIEditor {
             self.createNewLayout();
         });
         element.querySelector("#ui-tool-menu-save").addEventListener('click', function () {
-            self.saveToLocalStorage();
+            self.layoutEditor.save();
         });
         element.querySelector("#ui-tool-menu-delete").addEventListener('click', function () {
             self.deleteCurrentLayout();
@@ -42,12 +35,9 @@ class LayoutUIEditor extends UIEditor {
     }
 
     addNewLayout (name: string) {
-        var newLayout = {
-            name: name,
-            layout: []
-        };
-        this.layoutEditor.load(newLayout);
-        this.addNewLayoutToList(newLayout, true);
+        var layout = this.layoutEditor.new(name);
+        this.addNewLine(layout, true);
+        this.changeLayout(layout.id);
     }
 
     deleteCurrentLayout() {
@@ -58,29 +48,42 @@ class LayoutUIEditor extends UIEditor {
         }
         var line: HTMLElement = this.html_layouts.querySelector("span.active") as HTMLElement;
         line.parentElement.removeChild(line);
-        var index = this.getIndex(name);
-        if (index >= 0) {
-            this.layouts.splice(index, 1);
-            if (index >= this.layouts.length) {
-                index--;
-            }
-            if (index >= 0) {
-                this.html_layouts.querySelectorAll("span")[index].classList.add("active");
-                this.layoutEditor.load(this.layouts[index]);
-            } else {
-                this.addNewLayout("no name");
-            }
-        }
+        this.layoutEditor.delete(this);
     }
 
     copyCurrentLayout() {
         var name = this.promptNewName("copy's name", this.layoutEditor.current.name + " (copy)");
         if (name) {
-            var newLayout = this.copyLayout(this.layoutEditor.current);
-            newLayout.name = name;
-            this.layoutEditor.load(newLayout);
-            this.addNewLayoutToList(newLayout, true);
+            this.layoutEditor.copy(this, name);
+            this.updateList();
         }
+    }
+
+    setSelectedLayout (id: number) {
+        var lists = this.html_layouts.querySelectorAll("span.layout-line");
+        for (var i = 0; i < lists.length; ++i) {
+            var element = lists[i] as HTMLElement;
+            element.classList.remove("active");
+            if (element.dataset.layoutId === id.toString(10)) {
+                element.classList.add("active");
+            }
+        }
+    }
+
+    addNewLine (layout: Layout, selected = true) {
+        var html_layout = document.createElement('span');
+        var self = this;
+        html_layout.addEventListener('click', function () {
+            self.changeLayout(layout.id);
+        });
+        if (selected) {
+            html_layout.classList.add("active");
+        }
+        html_layout.innerText = layout.name;
+        html_layout.title = layout.name;
+        html_layout.dataset.layoutId = layout.id.toString(10);
+        html_layout.classList.add("layout-line");
+        this.html_layouts.appendChild(html_layout);
     }
 
     private promptNewName (promptText: string, suggestion: string = "") {
@@ -93,7 +96,7 @@ class LayoutUIEditor extends UIEditor {
             if (!layoutName) {
                 return undefined;
             }
-            validName = layoutName.length > 0 && !this.hasLayoutName(layoutName);
+            validName = layoutName.length > 0 && !this.nameAlreadyExists(layoutName);
         } while (!validName && attempt < 3);
 
         if (validName) {
@@ -102,93 +105,20 @@ class LayoutUIEditor extends UIEditor {
         return undefined;
     }
 
-    private hasLayoutName(layoutName: string) {
-        for (var i = 0; i < this.layouts.length; ++i) {
-            if (this.layouts[i].name.toLowerCase() === layoutName.toLowerCase()) {
-                return true;
-            }
-        }
-        return false;
+    private nameAlreadyExists(name: string) {
+        return this.layoutEditor.nameAlreadyExists(name);
     }
 
-    private addNewLayoutToList(layout: Layout, selected = false) {
-        this.layouts.push(layout);
-        var html_layout = document.createElement('span');
-        var self = this;
-        html_layout.addEventListener('click', function () {
-            self.loadLayout(html_layout, layout);
-        });
-        if (selected) {
-            var spans = this.html_layouts.querySelectorAll("span");
-            for (var i = 0; i < spans.length; ++i) {
-                spans[i].classList.remove("active");
-            }
-            html_layout.classList.add("active");
-        }
-        html_layout.innerText = layout.name;
-        html_layout.title = layout.name;
-        this.html_layouts.appendChild(html_layout);
+    private changeLayout(id: number) {
+        this.layoutEditor.load(id);
+        this.setSelectedLayout(id);
     }
 
-    private loadLayout(element: HTMLElement, layout: Layout) {
-        this.layoutEditor.load(layout);
-        var spans = this.html_layouts.querySelectorAll("span");
-        for (var i = 0; i < spans.length; ++i) {
-            spans[i].classList.remove("active");
+    public updateList() {
+        var lines = this.html_layouts.querySelectorAll("span.layout-line");
+        for (var i = 0; i < lines.length; ++i) {
+            lines[i].parentElement.removeChild(lines[i]);
         }
-        element.classList.add("active");
-    }
-
-    private copyLayout (layout: Layout): Layout {
-        var copy: Layout = {
-            name: layout.name,
-            layout: []
-        };
-        for (var j = 0; j < layout.layout.length; ++j) {
-            copy.layout[j] = [];
-            if (!layout.layout[j]) {
-                continue;
-            }
-            for (var i = 0; i < layout.layout[j].length; ++i) {
-                if (!layout.layout[j][i] && layout.layout[j][i] !== 0) {
-                    copy.layout[j][i] = null;
-                } else {
-                    copy.layout[j][i] = layout.layout[j][i];
-                }
-            }
-        }
-        return copy;
-    }
-
-    private saveToLocalStorage() {
-        var layouts: Array<Layout> = [];
-        for (var l = 0; l < this.layouts.length; ++l) {
-            var layout = this.copyLayout(this.layouts[l]);
-            layouts.push(layout);
-        }
-        var json = JSON.stringify(layouts);
-        localStorage.setItem("layouts", json);
-    }
-
-    private loadFromLocalStorage () {
-        var jsonStr = localStorage.getItem("layouts");
-        try {
-            var json = JSON.parse(jsonStr);
-            for (var i = 0; i < json.length; ++i) {
-                this.addNewLayoutToList(json[i], i === 0);
-                if (i === 0) this.layoutEditor.load(json[i]);
-            }
-        } catch (err) {
-            this.addNewLayout("blank");
-        }
-    }
-
-    private getIndex(name: string) {
-        for (var i = 0; i < this.layouts.length; ++i) {
-            if (this.layouts[i].name === name) {
-                return i;
-            }
-        }
-        return -1;
+        this.layoutEditor.updateList(this);
     }
 }

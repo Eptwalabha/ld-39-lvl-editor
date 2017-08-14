@@ -1,13 +1,12 @@
 class LayoutEditor extends Editor {
     public current: Layout;
     public tool: LayoutTool;
+    private layoutManager: LayoutManager;
 
-    constructor (canvas: HTMLCanvasElement) {
+    constructor (canvas: HTMLCanvasElement, layoutManager) {
         super(0, 0, canvas);
-        this.current = {
-            layout: [],
-            name: "toto"
-        };
+        this.layoutManager = layoutManager;
+        this.current = this.layoutManager.getCurrent();
     }
 
     update (): void {
@@ -44,8 +43,34 @@ class LayoutEditor extends Editor {
 
     }
 
-    load(layout: Layout) {
-        this.current = layout;
+    load(id: number) {
+        this.current = this.layoutManager.setCurrent(id);
+    }
+
+    new (name: string) {
+        return this.layoutManager.new(name);
+    }
+
+    save () {
+        this.layoutManager.save();
+    }
+
+    copy (ui: LayoutUIEditor, name: string) {
+        var layout = this.layoutManager.copy(this.current.id, name);
+        if (layout) {
+            this.current = layout;
+            console.log(this.current.id, this.current.name);
+            ui.addNewLine(this.current);
+            ui.setSelectedLayout(this.current.id);
+        }
+    }
+
+    delete (ui: LayoutUIEditor) {
+        var newCurrent = this.layoutManager.delete(this.current.id);
+        if (newCurrent) {
+            this.current = newCurrent;
+        }
+        ui.updateList();
     }
 
     changeTool (tool: LayoutTool) {
@@ -63,5 +88,17 @@ class LayoutEditor extends Editor {
             case 6: return 0x666666;
         }
         return 0x888888;
+    }
+
+    nameAlreadyExists(name: string) {
+        return this.layoutManager.nameAlreadyExists(name);
+    }
+
+    updateList(ui: LayoutUIEditor) {
+        var layouts = this.layoutManager.getAll();
+        for (var i = 0; i < layouts.length; ++i) {
+            var layout = layouts[i];
+            ui.addNewLine(layout, layout.id === this.current.id);
+        }
     }
 }
