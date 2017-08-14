@@ -1,4 +1,4 @@
-class PenTool extends LayoutTool {
+class PenLayoutTool extends LayoutTool {
 
     private value: number;
 

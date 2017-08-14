@@ -1,31 +1,30 @@
-class TileUIEditor extends UIEditor {
+class EntityUIEditor extends UIEditor {
 
+    private levelEditor: LevelEditor;
     private htmlSection: HTMLElement;
-    private layoutEditor: LayoutEditor;
-    private pen: PenLayoutTool;
-    private eraser: EraserTool;
+    private pen: PenLevelTool;
 
-
-    constructor (element: HTMLElement, editor: LayoutEditor) {
+    constructor (element: HTMLElement, editor: LevelEditor) {
         super(element, editor);
-        this.layoutEditor = editor;
+        this.levelEditor = editor;
         this.htmlSection = element.querySelector(".ui-section-content") as HTMLElement;
         this.bindMenus(element);
         this.bindTiles();
-        this.pen = new PenLayoutTool();
-        this.eraser = new EraserTool();
-        this.layoutEditor.changeTool(this.pen);
+        this.pen = new PenLevelTool();
+        // this.eraser = new EraserTool();
+        this.levelEditor.changeTool(this.pen);
     }
 
     private bindMenus (element: HTMLElement) {
         var self = this;
-        element.querySelector("#ui-tile-pen").addEventListener('click', function () {
-            self.layoutEditor.changeTool(self.pen);
+        element.querySelector("#ui-entity-pen").addEventListener('click', function () {
+            self.levelEditor.changeTool(self.pen);
             self.selectMenu(this);
         });
-        element.querySelector("#ui-tile-eraser").addEventListener('click', function () {
-            self.layoutEditor.changeTool(self.eraser);
-            self.selectMenu(this);
+        element.querySelector("#ui-entity-eraser").addEventListener('click', function () {
+            // TODO
+            // self.levelEditor.changeTool(self.eraser);
+            // self.selectMenu(this);
         });
     }
 
@@ -39,7 +38,7 @@ class TileUIEditor extends UIEditor {
             tile.style.backgroundColor = "#" + ("000000" + LayoutEditor.getColor(i).toString(16)).substr(-6);
             this.htmlSection.appendChild(tile);
             tile.addEventListener('click', function () {
-                self.pen.setValue(parseInt(this.dataset.tileValue, 10));
+                self.pen.setValue(parseInt(this.dataset.tileValue, 10), 1);
                 self.selectTile(this);
             });
         }

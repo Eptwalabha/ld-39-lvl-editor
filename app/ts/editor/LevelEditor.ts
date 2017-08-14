@@ -1,5 +1,7 @@
 class LevelEditor extends Editor {
 
+    public tool: LevelTool;
+
     constructor (canvas: HTMLCanvasElement) {
         super(0, 0, canvas);
     }
@@ -17,5 +19,9 @@ class LevelEditor extends Editor {
 
     clickAt (x: number, y: number) {
 
+    }
+
+    changeTool (tool: LevelTool) {
+        this.tool = tool;
     }
 }
