@@ -65,7 +65,7 @@ class LayoutEditor extends Editor {
         }
     }
 
-    delete (ui: LayoutUIEditor) {
+    deleteLayout (ui: LayoutUIEditor) {
         var newCurrent = this.layoutManager.delete(this.current.id);
         if (newCurrent) {
             this.current = newCurrent;

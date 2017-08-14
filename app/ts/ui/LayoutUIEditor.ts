@@ -48,7 +48,7 @@ class LayoutUIEditor extends UIEditor {
         }
         var line: HTMLElement = this.html_layouts.querySelector("span.active") as HTMLElement;
         line.parentElement.removeChild(line);
-        this.layoutEditor.delete(this);
+        this.layoutEditor.deleteLayout(this);
     }
 
     copyCurrentLayout() {
@@ -60,30 +60,30 @@ class LayoutUIEditor extends UIEditor {
     }
 
     setSelectedLayout (id: number) {
-        var lists = this.html_layouts.querySelectorAll("span.layout-line");
-        for (var i = 0; i < lists.length; ++i) {
-            var element = lists[i] as HTMLElement;
-            element.classList.remove("active");
-            if (element.dataset.layoutId === id.toString(10)) {
-                element.classList.add("active");
+        var elements = this.html_layouts.querySelectorAll("span.layout-line") as NodeListOf<HTMLElement>;
+        for (var i in elements) {
+            if (!elements.hasOwnProperty(i)) continue;
+            elements[i].classList.remove("active");
+            if (elements[i].dataset.layoutId === id.toString(10)) {
+                elements[i].classList.add("active");
             }
         }
     }
 
     addNewLine (layout: Layout, selected = true) {
-        var html_layout = document.createElement('span');
+        var htmlLayout = document.createElement('span');
         var self = this;
-        html_layout.addEventListener('click', function () {
+        htmlLayout.addEventListener('click', function () {
             self.changeLayout(layout.id);
         });
         if (selected) {
-            html_layout.classList.add("active");
+            htmlLayout.classList.add("active");
         }
-        html_layout.innerText = layout.name;
-        html_layout.title = layout.name;
-        html_layout.dataset.layoutId = layout.id.toString(10);
-        html_layout.classList.add("layout-line");
-        this.html_layouts.appendChild(html_layout);
+        htmlLayout.innerText = layout.name;
+        htmlLayout.title = layout.name;
+        htmlLayout.dataset.layoutId = layout.id.toString(10);
+        htmlLayout.classList.add("layout-line");
+        this.html_layouts.appendChild(htmlLayout);
     }
 
     private promptNewName (promptText: string, suggestion: string = "") {
