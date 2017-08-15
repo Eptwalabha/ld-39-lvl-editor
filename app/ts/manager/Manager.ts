@@ -1,3 +1,8 @@
+interface Entity {
+    id: number,
+    name: string
+}
+
 abstract class Manager {
 
     constructor () {

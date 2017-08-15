@@ -3,10 +3,14 @@ class EntityUIEditor extends UIEditor {
     private levelEditor: LevelEditor;
     private htmlSection: HTMLElement;
     private pen: PenLevelTool;
+    private itemManager: ItemManager;
+    private monsterManager: MonsterManager;
 
-    constructor (element: HTMLElement, editor: LevelEditor) {
+    constructor (element: HTMLElement, editor: LevelEditor, itemManager: ItemManager, monsterManager: MonsterManager) {
         super(element, editor);
         this.levelEditor = editor;
+        this.itemManager = itemManager;
+        this.monsterManager = monsterManager;
         this.htmlSection = element.querySelector(".ui-section-content") as HTMLElement;
         this.bindMenus(element);
         this.pen = new PenLevelTool();

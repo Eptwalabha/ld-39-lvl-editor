@@ -19,8 +19,13 @@ class EditorState extends Phaser.State {
             e.preventDefault();
         };
         this.camera.flash(0x000000);
-        this.layoutEditor = new LayoutEditor(this.game.canvas, new LayoutManager());
-        this.levelEditor = new LevelEditor(this.game.canvas);
+        var layoutManager = new LayoutManager();
+        var levelManager = new LevelManager();
+        var monsterManager = new MonsterManager();
+        var itemManager = new ItemManager();
+
+        this.layoutEditor = new LayoutEditor(this.game.canvas, layoutManager);
+        this.levelEditor = new LevelEditor(this.game.canvas, levelManager);
         this.currentEditor = this.layoutEditor;
 
         var entityTool = document.getElementById("tool-entity") as HTMLElement;
@@ -29,7 +34,7 @@ class EditorState extends Phaser.State {
         this.coordinates = document.getElementById("mouse-position") as HTMLElement;
         this.pointer = {x: 0, y: 0};
 
-        new EntityUIEditor(entityTool, this.levelEditor);
+        new EntityUIEditor(entityTool, this.levelEditor, itemManager, monsterManager);
         new LayoutUIEditor(layoutTool, this.layoutEditor);
         new TileUIEditor(tileTool, this.layoutEditor);
 

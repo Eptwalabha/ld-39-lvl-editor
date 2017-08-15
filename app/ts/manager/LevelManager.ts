@@ -1,7 +1,9 @@
 interface Level {
     id: number,
     name: string,
-    layout: Array<Array<number>>
+    layoutId: number,
+    monsters: Array<any>,
+    items: Array<any>
 }
 
 class LevelManager extends Manager {
@@ -16,11 +18,15 @@ class LevelManager extends Manager {
     }
 
     create(name: string): Level {
-        return {
+        var newLevel = {
             id: this.getUnusedId(),
             name: 'toto',
-            layout: []
+            layoutId: 0,
+            monsters: [],
+            items: []
         };
+        this.levels.push(newLevel);
+        return newLevel;
     }
 
     copy(id: number, name: string) {
@@ -55,7 +61,7 @@ class LevelManager extends Manager {
         return null;
     }
 
-    setCurrent (id: number): Layout {
+    setCurrent (id: number): Level {
         if (this.idExists(id)) this.current = id;
         return this.getCurrent();
     }
@@ -90,6 +96,7 @@ class LevelManager extends Manager {
     private loadFromLocalStorage () {
         this.levels = [];
         var jsonStr = localStorage.getItem("levels");
+        console.log(jsonStr);
         try {
             var json = JSON.parse(jsonStr);
             for (var i = 0; i < json.length; ++i) {
@@ -108,7 +115,9 @@ class LevelManager extends Manager {
         var copy: Level = {
             id: level.id,
             name: level.name,
-            layout: []
+            layoutId: level.layoutId,
+            monsters: [],
+            items: []
         };
         return copy;
     }

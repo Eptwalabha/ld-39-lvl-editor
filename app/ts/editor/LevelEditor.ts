@@ -1,9 +1,11 @@
 class LevelEditor extends Editor {
 
     public tool: LevelTool;
+    private levelManager: LevelManager;
 
-    constructor (canvas: HTMLCanvasElement) {
+    constructor (canvas: HTMLCanvasElement, levelManager: LevelManager) {
         super(0, 0, canvas);
+        this.levelManager = levelManager;
     }
 
     update (): void {

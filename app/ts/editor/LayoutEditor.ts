@@ -3,7 +3,7 @@ class LayoutEditor extends Editor {
     public tool: LayoutTool;
     private layoutManager: LayoutManager;
 
-    constructor (canvas: HTMLCanvasElement, layoutManager) {
+    constructor (canvas: HTMLCanvasElement, layoutManager: LayoutManager) {
         super(0, 0, canvas);
         this.layoutManager = layoutManager;
         this.current = this.layoutManager.getCurrent();
