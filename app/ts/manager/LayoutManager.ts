@@ -15,7 +15,7 @@ class LayoutManager extends Manager {
         this.current = this.layouts[0].id;
     }
 
-    new(name: string): Layout {
+    create(name: string): Layout {
         var newLayout = {
             name: name,
             layout: [],
@@ -37,7 +37,7 @@ class LayoutManager extends Manager {
         return false;
     }
 
-    delete(id: number) {
+    remove(id: number) {
         var index = this.getIndexOf(id);
         if (index >= 0) {
             this.layouts.splice(index, 1);
@@ -47,7 +47,7 @@ class LayoutManager extends Manager {
             if (index >= 0) {
                 return this.layouts[index];
             } else {
-                return this.new("no name");
+                return this.create("no name");
             }
         }
         return null;
@@ -124,7 +124,7 @@ class LayoutManager extends Manager {
                 this.layouts.push(layout);
             }
         } catch (err) {
-            this.new("blank");
+            this.create("blank");
         }
     }
 

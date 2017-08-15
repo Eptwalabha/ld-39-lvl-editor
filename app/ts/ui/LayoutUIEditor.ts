@@ -35,7 +35,7 @@ class LayoutUIEditor extends UIEditor {
     }
 
     addNewLayout (name: string) {
-        var layout = this.layoutEditor.new(name);
+        var layout = this.layoutEditor.create(name);
         this.addNewLine(layout, true);
         this.changeLayout(layout.id);
     }

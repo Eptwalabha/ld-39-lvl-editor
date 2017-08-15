@@ -47,8 +47,8 @@ class LayoutEditor extends Editor {
         this.current = this.layoutManager.setCurrent(id);
     }
 
-    new (name: string) {
-        return this.layoutManager.new(name);
+    create (name: string) {
+        return this.layoutManager.create(name);
     }
 
     save () {
@@ -66,7 +66,7 @@ class LayoutEditor extends Editor {
     }
 
     deleteLayout (ui: LayoutUIEditor) {
-        var newCurrent = this.layoutManager.delete(this.current.id);
+        var newCurrent = this.layoutManager.remove(this.current.id);
         if (newCurrent) {
             this.current = newCurrent;
         }

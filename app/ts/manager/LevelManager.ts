@@ -15,7 +15,7 @@ class LevelManager extends Manager {
         this.current = this.levels[0].id;
     }
 
-    new(name: string): Level {
+    create(name: string): Level {
         return {
             id: this.getUnusedId(),
             name: 'toto',
@@ -26,7 +26,7 @@ class LevelManager extends Manager {
     copy(id: number, name: string) {
     }
 
-    delete(id: number) {
+    remove(id: number) {
     }
 
     private getIndexOf (id: number) {
@@ -100,7 +100,7 @@ class LevelManager extends Manager {
                 this.levels.push(level);
             }
         } catch (err) {
-            this.new("blank");
+            this.create("blank");
         }
     }
 

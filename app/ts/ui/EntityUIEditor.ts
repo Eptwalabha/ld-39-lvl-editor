@@ -10,7 +10,6 @@ class EntityUIEditor extends UIEditor {
         this.htmlSection = element.querySelector(".ui-section-content") as HTMLElement;
         this.bindMenus(element);
         this.pen = new PenLevelTool();
-        // this.eraser = new EraserTool();
         this.levelEditor.changeTool(this.pen);
     }
 
