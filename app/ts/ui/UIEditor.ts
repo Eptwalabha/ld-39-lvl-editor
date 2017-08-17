@@ -25,4 +25,10 @@ class UIEditor {
             this.reduce.classList.add('folded');
         }
     }
+
+    protected actionOnEditor () {
+        if (this.editor.onAction && typeof this.editor.onAction === 'function') {
+            this.editor.onAction();
+        }
+    }
 }

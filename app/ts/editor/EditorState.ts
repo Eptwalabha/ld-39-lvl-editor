@@ -24,8 +24,17 @@ class EditorState extends Phaser.State {
         var monsterManager = new MonsterManager();
         var itemManager = new ItemManager();
 
+        var self = this;
         this.layoutEditor = new LayoutEditor(this.game.canvas, layoutManager);
+        this.layoutEditor.onAction = function () {
+            self.currentEditor = self.layoutEditor;
+        };
         this.levelEditor = new LevelEditor(this.game.canvas, levelManager);
+        this.levelEditor.currentLayout = this.layoutEditor.current;
+        this.levelEditor.onAction = function () {
+            self.currentEditor = self.levelEditor;
+        };
+
         this.currentEditor = this.layoutEditor;
 
         var entityTool = document.getElementById("tool-entity") as HTMLElement;

@@ -14,15 +14,19 @@ class LayoutUIEditor extends UIEditor {
     private bindMenus (element: HTMLElement) {
         var self = this;
         element.querySelector("#ui-tool-menu-new").addEventListener('click', function () {
+            self.actionOnEditor();
             self.createNewLayout();
         });
         element.querySelector("#ui-tool-menu-save").addEventListener('click', function () {
+            self.actionOnEditor();
             self.layoutEditor.save();
         });
         element.querySelector("#ui-tool-menu-delete").addEventListener('click', function () {
+            self.actionOnEditor();
             self.deleteCurrentLayout();
         });
         element.querySelector("#ui-tool-menu-copy").addEventListener('click', function () {
+            self.actionOnEditor();
             self.copyCurrentLayout();
         });
     }
@@ -74,6 +78,7 @@ class LayoutUIEditor extends UIEditor {
         var htmlLayout = document.createElement('span');
         var self = this;
         htmlLayout.addEventListener('click', function () {
+            self.actionOnEditor();
             self.changeLayout(layout.id);
         });
         if (selected) {

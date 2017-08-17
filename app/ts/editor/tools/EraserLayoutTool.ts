@@ -1,4 +1,4 @@
-class EraserTool extends LayoutTool {
+class EraserLayoutTool extends LayoutTool {
 
     process(x: number, y: number, layout: Layout) {
         if (layout.layout[y] && layout.layout[y][x]>= 0) {

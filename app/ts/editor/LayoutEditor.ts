@@ -12,9 +12,9 @@ class LayoutEditor extends Editor {
     update (): void {
     }
 
-    render(graphics: Phaser.Graphics): void {
+    render(graphics: Phaser.Graphics, alpha: number = 1): void {
         super.renderGrid(graphics);
-        this.renderLayout(graphics);
+        LayoutEditor.renderLayout(graphics, this.current, this.x, this.y, this.zoom, alpha);
     }
 
     generate () {
@@ -23,20 +23,19 @@ class LayoutEditor extends Editor {
 
     clickAt (x: number, y: number) {
         if (x < 0 || y < 0) return;
-
         this.tool.process(x, y, this.current);
     }
 
-    private renderLayout(graphics: Phaser.Graphics) {
+    static renderLayout(graphics: Phaser.Graphics, theLayout: Layout, x: number, y: number, zoom: number, alpha: number = 1) {
 
-        var layout = this.current.layout;
+        var layout = theLayout.layout;
 
-        for (var y = 0; y < layout.length; ++y) {
-            if (!layout[y]) continue;
-            for (var x = 0; x < layout[y].length; ++x) {
-                if (!layout[y][x] && layout[y][x] !== 0) continue;
-                graphics.beginFill(LayoutEditor.getColor(layout[y][x]), 1);
-                graphics.drawRect(x * this.zoom + this.x, y * this.zoom + this.y, this.zoom, this.zoom);
+        for (var j = 0; j < layout.length; ++j) {
+            if (!layout[j]) continue;
+            for (var i = 0; i < layout[j].length; ++i) {
+                if (!layout[j][i] && layout[j][i] !== 0) continue;
+                graphics.beginFill(LayoutEditor.getColor(layout[j][i]), alpha);
+                graphics.drawRect(i * zoom + x, j * zoom + y, zoom, zoom);
                 graphics.endFill();
             }
         }
@@ -59,7 +58,6 @@ class LayoutEditor extends Editor {
         var layout = this.layoutManager.copy(this.current.id, name);
         if (layout) {
             this.current = layout;
-            console.log(this.current.id, this.current.name);
             ui.addNewLine(this.current);
             ui.setSelectedLayout(this.current.id);
         }

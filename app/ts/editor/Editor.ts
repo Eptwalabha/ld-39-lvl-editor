@@ -7,6 +7,7 @@ abstract class Editor {
     private dragDiffX: number;
     private dragDiffY: number;
     private canvas: HTMLCanvasElement;
+    public onAction;
 
     constructor (x: number, y: number, canvas: HTMLCanvasElement) {
         this.updateOrigin(x, y);

@@ -3,6 +3,7 @@ class EntityUIEditor extends UIEditor {
     private levelEditor: LevelEditor;
     private htmlSection: HTMLElement;
     private pen: PenLevelTool;
+    private eraser: EraserLevelTool;
     private itemManager: ItemManager;
     private monsterManager: MonsterManager;
 
@@ -14,6 +15,7 @@ class EntityUIEditor extends UIEditor {
         this.htmlSection = element.querySelector(".ui-section-content") as HTMLElement;
         this.bindMenus(element);
         this.pen = new PenLevelTool();
+        this.eraser = new EraserLevelTool();
         this.levelEditor.changeTool(this.pen);
     }
 
@@ -21,22 +23,27 @@ class EntityUIEditor extends UIEditor {
         var self = this;
         element.querySelector("#ui-entity-level").addEventListener('click', function () {
             // TODO
-            self.levelEditor.changeTool(self.pen);
+            self.actionOnEditor();
             self.selectMenu(this);
+            self.updateTool("level");
         });
         element.querySelector("#ui-entity-game-item").addEventListener('click', function () {
             // TODO
-            self.levelEditor.changeTool(self.pen);
+            // self.levelEditor.changeTool(self.pen);
+            self.actionOnEditor();
             self.selectMenu(this);
+            self.updateTool("items");
         });
         element.querySelector("#ui-entity-monster").addEventListener('click', function () {
             // TODO
-            self.levelEditor.changeTool(self.pen);
+            self.actionOnEditor();
             self.selectMenu(this);
+            self.updateTool("monster");
         });
         element.querySelector("#ui-entity-eraser").addEventListener('click', function () {
-            // TODO eraser
+            self.actionOnEditor();
             self.selectMenu(this);
+            self.levelEditor.changeTool(self.eraser);
         });
     }
 
@@ -63,6 +70,8 @@ class EntityUIEditor extends UIEditor {
     }
 
     private activeMenu(activeMenu: HTMLElement) {
-        console.log(activeMenu.dataset);
+    }
+
+    private updateTool(type: string) {
     }
 }

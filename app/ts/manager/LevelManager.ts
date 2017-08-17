@@ -96,7 +96,6 @@ class LevelManager extends Manager {
     private loadFromLocalStorage () {
         this.levels = [];
         var jsonStr = localStorage.getItem("levels");
-        console.log(jsonStr);
         try {
             var json = JSON.parse(jsonStr);
             for (var i = 0; i < json.length; ++i) {

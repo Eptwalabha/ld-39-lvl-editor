@@ -3,7 +3,7 @@ class TileUIEditor extends UIEditor {
     private htmlSection: HTMLElement;
     private layoutEditor: LayoutEditor;
     private pen: PenLayoutTool;
-    private eraser: EraserTool;
+    private eraser: EraserLayoutTool;
 
 
     constructor (element: HTMLElement, editor: LayoutEditor) {
@@ -13,7 +13,7 @@ class TileUIEditor extends UIEditor {
         this.bindMenus(element);
         this.bindTiles();
         this.pen = new PenLayoutTool();
-        this.eraser = new EraserTool();
+        this.eraser = new EraserLayoutTool();
         this.layoutEditor.changeTool(this.pen);
     }
 
@@ -46,6 +46,7 @@ class TileUIEditor extends UIEditor {
     }
 
     private selectMenu(menu: HTMLImageElement) {
+        this.actionOnEditor();
         var images = this.header.querySelectorAll("img");
         for (var i = 0; i < images.length; ++i) {
             images[i].classList.remove("selected");
@@ -54,6 +55,7 @@ class TileUIEditor extends UIEditor {
     }
 
     private selectTile (tile: HTMLSpanElement) {
+        this.actionOnEditor();
         var tiles = this.htmlSection.querySelectorAll(".tile");
         for (var j = 0; j < tiles.length; ++j) {
             tiles[j].classList.remove("selected");
