@@ -14,6 +14,7 @@ class EntityUIEditor extends UIEditor {
         this.monsterManager = monsterManager;
         this.htmlSection = element.querySelector(".ui-section-content") as HTMLElement;
         this.bindMenus(element);
+        this.buildMenus();
         this.pen = new PenLevelTool();
         this.eraser = new EraserLevelTool();
         this.levelEditor.changeTool(this.pen);
@@ -73,5 +74,40 @@ class EntityUIEditor extends UIEditor {
     }
 
     private updateTool(type: string) {
+    }
+
+    private buildMenus() {
+        var entityContainer = this.htmlSection.querySelector("*[data-menu-id='ui-entity-game-item']");
+        this.buildMenu(entityContainer, this.itemManager.items, 1);
+        var monsterContainer = this.htmlSection.querySelector("*[data-menu-id='ui-entity-monster']");
+        this.buildMenu(monsterContainer, this.monsterManager.monsters, 2);
+    }
+
+    private buildMenu (container: Element, entities: Array<Entity>, type: number) {
+        var i: number;
+        var self = this;
+        for (i = 0; i < entities.length; ++i) {
+            var entity = document.createElement('span');
+            entity.classList.add("tile");
+            if (i === 0) entity.classList.add("selected");
+            entity.dataset.itemId = entities[i].id.toString();
+            entity.title = entities[i].name;
+            entity.style.backgroundColor = "#" + ("000000" + LayoutEditor.getColor(i).toString(16)).substr(-6);
+            container.appendChild(entity);
+            entity.addEventListener('click', function () {
+                self.pen.setValue(type, parseInt(this.dataset.itemId, 10));
+                self.selectTile(this);
+            });
+        }
+    }
+
+    private selectTile (tile: HTMLSpanElement) {
+        this.actionOnEditor();
+        var container: HTMLElement = tile.parentElement;
+        var tiles = container.querySelectorAll(".tile");
+        for (var j = 0; j < tiles.length; ++j) {
+            tiles[j].classList.remove("selected");
+        }
+        tile.classList.add("selected");
     }
 }

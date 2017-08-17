@@ -5,7 +5,7 @@ interface Monster extends Entity {
 
 class MonsterManager extends Manager {
 
-    private monsters: Array<Monster>;
+    monsters: Array<Monster>;
 
     constructor() {
         super();

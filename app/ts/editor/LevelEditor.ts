@@ -16,6 +16,7 @@ class LevelEditor extends Editor {
         super.renderGrid(graphics);
         if (this.currentLayout) {
             LayoutEditor.renderLayout(graphics, this.currentLayout, this.x, this.y, this.zoom, 0.2);
+            this.tool.render(graphics, this.currentLayout, this.x, this.y, this.zoom);
         }
     }
 
@@ -26,6 +27,10 @@ class LevelEditor extends Editor {
     clickAt (x: number, y: number) {
         if (x < 0 || y < 0) return;
         this.tool.process(x, y, this.current);
+    }
+
+    endClickAt (x: number, y: number) {
+        this.tool.endProcess(x, y, this.current);
     }
 
     changeTool (tool: LevelTool) {

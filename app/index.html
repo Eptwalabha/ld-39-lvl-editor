@@ -24,12 +24,8 @@
                     <div data-menu-id="ui-entity-level" class="toggle-menu-tab active">
                         level item menu
                     </div>
-                    <div data-menu-id="ui-entity-game-item" class="toggle-menu-tab">
-                        game item menu
-                    </div>
-                    <div data-menu-id="ui-entity-monster" class="toggle-menu-tab">
-                        monster menu
-                    </div>
+                    <div data-menu-id="ui-entity-game-item" class="toggle-menu-tab tile-container"></div>
+                    <div data-menu-id="ui-entity-monster" class="toggle-menu-tab tile-container"></div>
                 </div>
             </div>
 
@@ -54,7 +50,7 @@
                     </div>
                     <img class="ui-reduce" src="assets/images/reduce.png" alt="reduce window"/>
                 </div>
-                <div class="ui-section-content tile"></div>
+                <div class="ui-section-content tile-container"></div>
             </div>
         </div>
         <div id="editor">
@@ -67,6 +63,7 @@
         <script src="js/release/editor/Editor.js"></script>
         <script src="js/release/editor/LayoutEditor.js"></script>
         <script src="js/release/editor/LevelEditor.js"></script>
+        <script src="js/release/editor/tools/Tool.js"></script>
         <script src="js/release/editor/tools/LayoutTool.js"></script>
         <script src="js/release/editor/tools/LevelTool.js"></script>
         <script src="js/release/editor/tools/PenLayoutTool.js"></script>

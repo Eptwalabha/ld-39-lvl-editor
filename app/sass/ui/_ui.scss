@@ -104,26 +104,32 @@
           background: #8ec5b2;
         }
       }
+    }
 
-      &.tile {
-        flex-direction: row;
-        flex-wrap: wrap;
-        background: #ccc;
+    .tile-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      background: #ccc;
+      margin: 0;
+      max-height: 200px;
+      overflow: auto;
+      padding: 2px;
+      transition: max-height 200ms, padding 200ms;
 
-        span {
-          width: 32px;
-          height: 32px;
-          padding: 0;
-          border: 3px solid #ccc;
-          background: white;
-          transition: border-color 200ms;
+      span {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border: 3px solid #ccc;
+        background: white;
+        transition: border-color 200ms;
 
-          &:hover {
-            border-color: #7eb1c5;
-          }
-          &.selected {
-            border-color: #5796b0;
-          }
+        &:hover {
+          border-color: #7eb1c5;
+        }
+        &.selected {
+          border-color: #5796b0;
         }
       }
     }
@@ -134,6 +140,7 @@
       }
 
       .ui-section-content {
+        padding: 0 2px;
         max-height: 0;
       }
     }
@@ -144,7 +151,7 @@
       display: none;
 
       &.active {
-        display: block;
+        display: inherit;
       }
     }
   }

@@ -7,12 +7,14 @@ class EditorState extends Phaser.State {
     private graphics: Phaser.Graphics;
     private coordinates: HTMLElement;
     private pointer: {x: number, y: number};
+    private leftClickDown: boolean;
 
     preload () {
         this.game.load.atlas("tile", "assets/atlas/tiles.png", "assets/atlas/tiles.json");
     }
 
     create () {
+        this.leftClickDown = false;
         this.game.stage.backgroundColor = "#ddd";
         this.game.stage.smoothed = false;
         this.game.canvas.oncontextmenu = function (e: PointerEvent) {
@@ -57,13 +59,19 @@ class EditorState extends Phaser.State {
         var p = this.game.input.activePointer.position;
         this.pointer = this.currentEditor.coordinatesAt(p.x, p.y);
         if (this.game.input.activePointer.rightButton.isDown) {
-            this.currentEditor.dragStart(p.x, p.y);
+            this.levelEditor.dragStart(p.x, p.y);
+            this.layoutEditor.dragStart(p.x, p.y);
         } else {
-            this.currentEditor.dragEnd();
+            this.levelEditor.dragEnd();
+            this.layoutEditor.dragEnd();
         }
 
         if (this.game.input.activePointer.leftButton.isDown) {
+            this.leftClickDown = true;
             this.currentEditor.clickAt(this.pointer.x, this.pointer.y);
+        } else if (this.leftClickDown) {
+            this.leftClickDown = false;
+            this.currentEditor.endClickAt(this.pointer.x, this.pointer.y);
         }
 
         this.currentEditor.update();

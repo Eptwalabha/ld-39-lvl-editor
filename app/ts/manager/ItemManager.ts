@@ -4,7 +4,7 @@ interface Item extends Entity {
 
 class ItemManager extends Manager {
 
-    private items: Array<Item>;
+    items: Array<Item>;
 
     constructor () {
         super();

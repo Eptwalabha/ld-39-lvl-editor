@@ -19,6 +19,7 @@ abstract class Editor {
     abstract update(): void;
     abstract render(graphics: Phaser.Graphics): void;
     abstract clickAt(x: number, y: number): any;
+    abstract endClickAt(x: number, y: number): any;
     abstract generate(): any;
 
     updateOrigin(x: number, y: number): void {

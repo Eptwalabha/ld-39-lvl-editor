@@ -15,6 +15,7 @@ class LayoutEditor extends Editor {
     render(graphics: Phaser.Graphics, alpha: number = 1): void {
         super.renderGrid(graphics);
         LayoutEditor.renderLayout(graphics, this.current, this.x, this.y, this.zoom, alpha);
+        this.tool.render(graphics, this.current, this.x, this.y, this.zoom);
     }
 
     generate () {
@@ -22,8 +23,11 @@ class LayoutEditor extends Editor {
     }
 
     clickAt (x: number, y: number) {
-        if (x < 0 || y < 0) return;
         this.tool.process(x, y, this.current);
+    }
+
+    endClickAt (x: number, y: number) {
+        this.tool.endProcess(x, y, this.current);
     }
 
     static renderLayout(graphics: Phaser.Graphics, theLayout: Layout, x: number, y: number, zoom: number, alpha: number = 1) {
