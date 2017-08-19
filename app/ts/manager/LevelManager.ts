@@ -2,8 +2,13 @@ interface Level {
     id: number,
     name: string,
     layoutId: number,
-    monsters: Array<any>,
-    items: Array<any>
+    monsters: Array<LevelEntity>,
+    items: Array<LevelEntity>
+}
+
+interface LevelEntity {
+    position: {x: number, y: number},
+    value: number
 }
 
 class LevelManager extends Manager {
@@ -20,7 +25,7 @@ class LevelManager extends Manager {
     create(name: string): Level {
         var newLevel = {
             id: this.getUnusedId(),
-            name: 'toto',
+            name: name,
             layoutId: 0,
             monsters: [],
             items: []

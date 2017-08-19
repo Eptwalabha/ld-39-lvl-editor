@@ -26,20 +26,20 @@ class EntityUIEditor extends UIEditor {
             // TODO
             self.actionOnEditor();
             self.selectMenu(this);
-            self.updateTool("level");
+            self.updateTool(this.id, PenLevelToolType.LEVEL_ITEM);
         });
         element.querySelector("#ui-entity-game-item").addEventListener('click', function () {
             // TODO
             // self.levelEditor.changeTool(self.pen);
             self.actionOnEditor();
             self.selectMenu(this);
-            self.updateTool("items");
+            self.updateTool(this.id, PenLevelToolType.ITEM);
         });
         element.querySelector("#ui-entity-monster").addEventListener('click', function () {
             // TODO
             self.actionOnEditor();
             self.selectMenu(this);
-            self.updateTool("monster");
+            self.updateTool(this.id, PenLevelToolType.MONSTER);
         });
         element.querySelector("#ui-entity-eraser").addEventListener('click', function () {
             self.actionOnEditor();
@@ -73,17 +73,24 @@ class EntityUIEditor extends UIEditor {
     private activeMenu(activeMenu: HTMLElement) {
     }
 
-    private updateTool(type: string) {
+    private updateTool(menuId: string, type: PenLevelToolType) {
+        var tile = this.htmlSection
+            .querySelector("div[data-menu-id='" + menuId + "']")
+            .querySelector("span.tile.selected") as HTMLSpanElement;
+        if (tile) {
+            this.pen.setValue(type, parseInt(tile.dataset.itemId, 10));
+            this.levelEditor.changeTool(this.pen);
+        }
     }
 
     private buildMenus() {
         var entityContainer = this.htmlSection.querySelector("*[data-menu-id='ui-entity-game-item']");
-        this.buildMenu(entityContainer, this.itemManager.items, 1);
+        this.buildMenu(entityContainer, this.itemManager.items, PenLevelToolType.ITEM);
         var monsterContainer = this.htmlSection.querySelector("*[data-menu-id='ui-entity-monster']");
-        this.buildMenu(monsterContainer, this.monsterManager.monsters, 2);
+        this.buildMenu(monsterContainer, this.monsterManager.monsters, PenLevelToolType.MONSTER);
     }
 
-    private buildMenu (container: Element, entities: Array<Entity>, type: number) {
+    private buildMenu (container: Element, entities: Array<Entity>, type: PenLevelToolType) {
         var i: number;
         var self = this;
         for (i = 0; i < entities.length; ++i) {

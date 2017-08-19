@@ -63,11 +63,13 @@
         display: flex;
         flex-direction: row;
         flex-grow: 2;
+        flex-wrap: wrap;
         margin: 5px;
       }
 
       .ui-reduce {
         justify-self: right;
+        align-self: flex-start;
         margin: 5px;
       }
     }
