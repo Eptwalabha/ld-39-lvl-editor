@@ -3,9 +3,8 @@ abstract class LevelTool extends Tool {
         super();
     }
 
-    abstract process(x: number, y: number, level: Level);
-
-    abstract endProcess(x: number, y: number, level: Level);
+    abstract process(level: Level);
+    abstract endProcess(level: Level);
 
     render (graphics: Phaser.Graphics, layout: Layout, offsetX: number, offsetY: number, zoom: number) {
         graphics.beginFill(0x00ffff, 1);

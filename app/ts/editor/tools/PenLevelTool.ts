@@ -9,15 +9,15 @@ class PenLevelTool extends LevelTool {
         this.value = 1;
     }
 
-    process(x: number, y: number, level: Level) {
-        super.startClick(x, y);
+    process(level: Level) {
+        super.startClick();
         if (!this.down) {
             this.down = true;
         }
     }
 
-    endProcess(x: number, y: number, level: Level) {
-        super.endClick(x, y);
+    endProcess(level: Level) {
+        super.endClick();
     }
 
     setValue (entityType: number, value: number) {

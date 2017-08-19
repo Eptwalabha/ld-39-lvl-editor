@@ -2,7 +2,7 @@ abstract class Tool {
     protected down: boolean;
     protected positionStart: {x: number, y: number};
     protected positionEnd: {x: number, y: number};
-    protected position: {x: number, y: number};
+    public position: {x: number, y: number};
 
     constructor() {
         this.down = false;
@@ -11,20 +11,23 @@ abstract class Tool {
         this.position = {x: 0, y: 0};
     }
 
-    protected startClick (x: number, y: number) {
+    protected startClick () {
         if (!this.down) {
-            this.positionStart.x = x;
-            this.positionStart.y = y;
+            this.positionStart.x = this.position.x;
+            this.positionStart.y = this.position.y;
             this.down = true;
         }
-        this.position.x = x;
-        this.position.y = y;
     }
 
-    protected endClick (x: number, y: number) {
+    protected endClick () {
         this.down = false;
-        this.positionEnd.x = x;
-        this.positionEnd.y = y;
+        this.positionEnd.x = this.position.x;
+        this.positionEnd.y = this.position.y;
+    }
+
+    moveTo (x: number, y: number) {
+        this.position.x = x;
+        this.position.y = y;
     }
 
     protected getSelectedBox() {

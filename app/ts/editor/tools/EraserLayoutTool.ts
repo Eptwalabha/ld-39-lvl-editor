@@ -1,10 +1,10 @@
 class EraserLayoutTool extends LayoutTool {
 
-    process (x: number, y: number, layout: Layout) {
-        if (layout.layout[y] && layout.layout[y][x]>= 0) {
-            layout.layout[y][x] = null;
+    process (layout: Layout) {
+        if (layout.layout[this.position.y] && layout.layout[this.position.y][this.position.x]>= 0) {
+            layout.layout[this.position.y][this.position.x] = null;
         }
     }
 
-    endProcess (x: number, y: number, layout: Layout) {}
+    endProcess (layout: Layout) {}
 }

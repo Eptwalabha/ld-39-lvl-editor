@@ -24,13 +24,17 @@ class LevelEditor extends Editor {
         return [];
     }
 
-    clickAt (x: number, y: number) {
-        if (x < 0 || y < 0) return;
-        this.tool.process(x, y, this.current);
+    clickDown () {
+        if (this.tool.position.x < 0 || this.tool.position.y < 0) return;
+        this.tool.process(this.current);
     }
 
-    endClickAt (x: number, y: number) {
-        this.tool.endProcess(x, y, this.current);
+    endClick () {
+        this.tool.endProcess(this.current);
+    }
+
+    mouseMove (x: number, y: number) {
+        this.tool.moveTo(x, y);
     }
 
     changeTool (tool: LevelTool) {

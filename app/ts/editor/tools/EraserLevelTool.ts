@@ -1,10 +1,10 @@
 class EraserLevelTool extends LevelTool {
 
-    process(x: number, y: number, level: Level) {
-        super.startClick(x, y);
+    process(level: Level) {
+        super.startClick();
     }
 
-    endProcess(x: number, y: number, level: Level) {
-        super.endClick(x, y);
+    endProcess(level: Level) {
+        super.endClick();
     }
 }

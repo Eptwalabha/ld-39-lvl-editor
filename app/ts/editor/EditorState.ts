@@ -57,7 +57,6 @@ class EditorState extends Phaser.State {
 
     update () {
         var p = this.game.input.activePointer.position;
-        this.pointer = this.currentEditor.coordinatesAt(p.x, p.y);
         if (this.game.input.activePointer.rightButton.isDown) {
             this.levelEditor.dragStart(p.x, p.y);
             this.layoutEditor.dragStart(p.x, p.y);
@@ -66,12 +65,14 @@ class EditorState extends Phaser.State {
             this.layoutEditor.dragEnd();
         }
 
+        this.pointer = this.currentEditor.coordinatesAt(p.x, p.y);
+        this.currentEditor.mouseMove(this.pointer.x, this.pointer.y);
         if (this.game.input.activePointer.leftButton.isDown) {
             this.leftClickDown = true;
-            this.currentEditor.clickAt(this.pointer.x, this.pointer.y);
+            this.currentEditor.clickDown();
         } else if (this.leftClickDown) {
             this.leftClickDown = false;
-            this.currentEditor.endClickAt(this.pointer.x, this.pointer.y);
+            this.currentEditor.endClick();
         }
 
         this.currentEditor.update();

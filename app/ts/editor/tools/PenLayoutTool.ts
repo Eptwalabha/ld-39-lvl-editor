@@ -7,15 +7,15 @@ class PenLayoutTool extends LayoutTool {
         this.value = 1;
     }
 
-    process(x: number, y: number, layout: Layout) {
-        if (x < 0 || y < 0) return;
-        if (!layout.layout[y]) {
-            layout.layout[y] = [];
+    process(layout: Layout) {
+        if (this.position.x < 0 || this.position.y < 0) return;
+        if (!layout.layout[this.position.y]) {
+            layout.layout[this.position.y] = [];
         }
-        layout.layout[y][x] = this.value;
+        layout.layout[this.position.y][this.position.x] = this.value;
     }
 
-    endProcess(x: number, y: number, layout: Layout) {}
+    endProcess(layout: Layout) {}
 
     setValue (value: number) {
         this.value = value;
