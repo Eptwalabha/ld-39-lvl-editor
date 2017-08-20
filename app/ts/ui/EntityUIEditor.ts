@@ -22,12 +22,6 @@ class EntityUIEditor extends UIEditor {
 
     private bindMenus (element: HTMLElement) {
         var self = this;
-        element.querySelector("#ui-entity-level").addEventListener('click', function () {
-            // TODO
-            self.actionOnEditor();
-            self.selectMenu(this);
-            self.updateTool(this.id, PenLevelToolType.LEVEL_ITEM);
-        });
         element.querySelector("#ui-entity-game-item").addEventListener('click', function () {
             // TODO
             // self.levelEditor.changeTool(self.pen);

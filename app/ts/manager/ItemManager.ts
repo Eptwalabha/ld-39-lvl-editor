@@ -1,5 +1,6 @@
 interface Item extends Entity {
-    power: number
+    power?: number
+    unique: boolean
 }
 
 class ItemManager extends Manager {
@@ -32,18 +33,31 @@ class ItemManager extends Manager {
         this.items = [];
         this.items.push({
             id: 0,
-            name: "small",
-            power: 25
+            name: "start",
+            unique: true
         });
         this.items.push({
             id: 1,
-            name: "medium",
-            power: 50
+            name: "end",
+            unique: true
         });
         this.items.push({
             id: 2,
+            name: "small",
+            power: 25,
+            unique: false
+        });
+        this.items.push({
+            id: 3,
+            name: "medium",
+            power: 50,
+            unique: false
+        });
+        this.items.push({
+            id: 4,
             name: "large",
-            power: 100
+            power: 100,
+            unique: false
         });
     }
 }

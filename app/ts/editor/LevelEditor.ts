@@ -26,7 +26,7 @@ class LevelEditor extends Editor {
             offsetY = this.y + z2;
 
         this.current.items.forEach(function (item: LevelEntity) {
-            graphics.beginFill(0xFF00FF, alpha);
+            graphics.beginFill(LayoutEditor.getColor(item.value), alpha);
             graphics.drawCircle(
                 item.position.x * self.zoom + offsetX,
                 item.position.y * self.zoom + offsetY,
@@ -35,11 +35,14 @@ class LevelEditor extends Editor {
         });
 
         this.current.monsters.forEach(function (monster: LevelEntity) {
-            graphics.beginFill(0xFF0000, alpha);
-            graphics.drawCircle(
-                monster.position.x * self.zoom + offsetX,
-                monster.position.y * self.zoom + offsetY,
-                self.zoom);
+            graphics.beginFill(LayoutEditor.getColor(monster.value), alpha);
+            var x = monster.position.x * self.zoom + offsetX;
+            var y = monster.position.y * self.zoom + offsetY;
+            graphics.drawTriangle([
+                new Phaser.Point(x - z2, y + z2),
+                new Phaser.Point(x, y - z2),
+                new Phaser.Point(x + z2, y + z2)
+            ]);
             graphics.endFill();
         });
     }

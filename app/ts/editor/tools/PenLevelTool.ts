@@ -1,7 +1,6 @@
 enum PenLevelToolType {
-    LEVEL_ITEM = 0,
-    ITEM = 1,
-    MONSTER = 2
+    ITEM = 0,
+    MONSTER = 1
 }
 
 class PenLevelTool extends LevelTool {
@@ -26,10 +25,10 @@ class PenLevelTool extends LevelTool {
         super.endClick();
         PenLevelTool.removeLevelEntitiesAt(level, this.positionEnd.x, this.positionEnd.y);
         switch (this.entityType) {
-            case 1:
+            case PenLevelToolType.ITEM:
                 this.addItemToLevel(level);
                 break;
-            case 2:
+            case PenLevelToolType.MONSTER:
                 this.addMonsterToLevel(level);
                 break;
         }
