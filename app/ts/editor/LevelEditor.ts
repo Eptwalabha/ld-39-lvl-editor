@@ -96,10 +96,11 @@ class LevelEditor extends Editor {
             this.current = newCurrent;
         }
         ui.updateList();
+        this.load(this.current.id);
     }
 
     create (name: string) {
-        return this.levelManager.create(name, -1);
+        return this.levelManager.create(name);
     }
 
     save () {

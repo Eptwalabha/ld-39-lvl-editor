@@ -8,7 +8,7 @@ abstract class Manager {
     constructor () {
     }
 
-    abstract create (name: string, data?: any): any;
+    abstract create (name: string): any;
     abstract copy (id: number, name: string): any;
     abstract remove (id: number);
     abstract save ();

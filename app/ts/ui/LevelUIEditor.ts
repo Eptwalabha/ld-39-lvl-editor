@@ -47,6 +47,10 @@ class LevelUIEditor extends UIEditor {
             var layoutId = parseInt((dialog.querySelector("form select[name='layout-id']") as HTMLSelectElement).value, 10);
             self.levelEditor.updateLevel(id, name, layoutId);
             dialog.classList.remove("open");
+            var span = document.querySelector("div[data-level-id='" + id + "'] > span");
+            if (span) {
+                span.innerHTML = name;
+            }
         });
     }
 
@@ -69,7 +73,7 @@ class LevelUIEditor extends UIEditor {
         if (!confirmDelete) {
             return;
         }
-        var line: HTMLElement = this.htmlLevel.querySelector("span.active") as HTMLElement;
+        var line: HTMLElement = this.htmlLevel.querySelector(".active") as HTMLElement;
         line.parentElement.removeChild(line);
         this.levelEditor.deleteLevel(this);
     }

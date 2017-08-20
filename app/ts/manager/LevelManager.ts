@@ -22,11 +22,11 @@ class LevelManager extends Manager {
         this.current = this.levels[0].id;
     }
 
-    create(name: string, layoutId: number): Level {
+    create(name: string): Level {
         var newLevel = {
             id: this.getUnusedId(),
             name: name,
-            layoutId: layoutId,
+            layoutId: null,
             monsters: [],
             items: []
         };
@@ -47,6 +47,18 @@ class LevelManager extends Manager {
     }
 
     remove(id: number) {
+        var index = this.getIndexOf(id);
+        if (index >= 0) {
+            this.levels.splice(index, 1);
+            if (index >= this.levels.length) {
+                index--;
+            }
+            if (index >= 0) {
+                return this.levels[index];
+            } else {
+                return this.create("no name");
+            }
+        }
         return null;
     }
 
@@ -121,7 +133,7 @@ class LevelManager extends Manager {
                 this.levels.push(level);
             }
         } catch (err) {
-            this.create("blank", 0);
+            this.create("blank");
         }
     }
 
