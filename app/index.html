@@ -65,6 +65,24 @@
         <div id="editor">
             <span id="mouse-position"></span>
         </div>
+        <div id="dialog-edit-level" class="dialog">
+            <h1>Edit level #<span class="level-id"></span></h1>
+            <form action="#">
+                <input id="dialog-edit-level-form-id" name="level-id" type="hidden"/>
+                <div class="form-line">
+                    <label for="dialog-edit-level-form-name">Level's name</label>
+                    <input id="dialog-edit-level-form-name" name="level-name" type="text" />
+                </div>
+                <div class="form-line">
+                    <label for="dialog-edit-level-form-layout-id">Layout</label>
+                    <select id="dialog-edit-level-form-layout-id" name="layout-id"></select>
+                </div>
+                <div class="form-line">
+                    <button type="button" class="submit">Edit</button>
+                    <button type="button" class="close">Cancel</button>
+                </div>
+            </form>
+        </div>
         <!-- build:js js/script.js -->
         <script src="../node_modules/phaser-ce/build/phaser.min.js"></script>
         <script src="js/release/app.js"></script>
@@ -80,6 +98,7 @@
         <script src="js/release/editor/tools/EraserLayoutTool.js"></script>
         <script src="js/release/editor/tools/EraserLevelTool.js"></script>
         <script src="js/release/ui/UIEditor.js"></script>
+        <script src="js/release/ui/LevelUIEditor.js"></script>
         <script src="js/release/ui/LayoutUIEditor.js"></script>
         <script src="js/release/ui/TileUIEditor.js"></script>
         <script src="js/release/ui/EntityUIEditor.js"></script>

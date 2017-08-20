@@ -22,11 +22,11 @@ class LevelManager extends Manager {
         this.current = this.levels[0].id;
     }
 
-    create(name: string): Level {
+    create(name: string, layoutId: number): Level {
         var newLevel = {
             id: this.getUnusedId(),
             name: name,
-            layoutId: 0,
+            layoutId: layoutId,
             monsters: [],
             items: []
         };
@@ -35,9 +35,19 @@ class LevelManager extends Manager {
     }
 
     copy(id: number, name: string) {
+        var level = this.get(id);
+        if (level) {
+            var newLevel = this.copyLevel(level);
+            newLevel.id = this.getUnusedId();
+            newLevel.name = name;
+            this.levels.push(newLevel);
+            return newLevel;
+        }
+        return false;
     }
 
     remove(id: number) {
+        return null;
     }
 
     private getIndexOf (id: number) {
@@ -111,19 +121,32 @@ class LevelManager extends Manager {
                 this.levels.push(level);
             }
         } catch (err) {
-            this.create("blank");
+            this.create("blank", 0);
         }
     }
 
     private copyLevel (level: Level): Level {
-        var copy: Level = {
+        var monsters = [];
+        level.monsters.forEach(function (monster: LevelEntity) {
+            monsters.push({
+                position: {x: monster.position.x, y: monster.position.y},
+                value: monster.value
+            });
+        });
+        var items = [];
+        level.items.forEach(function (item: LevelEntity) {
+            items.push({
+                position: {x: item.position.x, y: item.position.y},
+                value: item.value
+            });
+        });
+        return {
             id: level.id,
             name: level.name,
             layoutId: level.layoutId,
-            monsters: [],
-            items: []
+            monsters: monsters,
+            items: items
         };
-        return copy;
     }
 
     nameAlreadyExists(name: string) {

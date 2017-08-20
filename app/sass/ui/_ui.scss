@@ -85,7 +85,7 @@
       background: white;
       transition: max-height 200ms;
 
-      span {
+      & > span, .level-line {
 
         background: white;
         line-height: 32px;
@@ -104,6 +104,25 @@
         &.active {
           opacity: 1;
           background: #8ec5b2;
+        }
+      }
+
+      .level-line {
+        display: flex;
+        border-bottom: 1px solid #cccccc;
+
+        span {
+          flex-grow: 2;
+          flex-wrap: wrap;
+          border-bottom: none;
+        }
+
+        img {
+          width: 24px;
+          height: 24px;
+          align-self: flex-start;
+          line-height: 32px;
+          padding-top: 4px;
         }
       }
     }
