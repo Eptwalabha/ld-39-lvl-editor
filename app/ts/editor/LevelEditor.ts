@@ -76,7 +76,7 @@ class LevelEditor extends Editor {
     }
 
     load(id: number) {
-        this.current = this.levelManager.get(id);
+        this.current = this.levelManager.setCurrent(id);
         this.currentLayout = this.layoutManager.get(this.current.layoutId);
     }
 
@@ -104,6 +104,7 @@ class LevelEditor extends Editor {
     }
 
     save () {
+        this.levelManager.save();
     }
 
     nameAlreadyExists(name: string) {
